@@ -1,12 +1,39 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hosting de una web estática con GitHub</title>
+    <title>Página personal de María</title>
+    <style>
+        div {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #avatar {
+            border-radius: 50%;
+        }
+    </style>
 </head>
+
 <body>
-    <h1>Bienvenido a mi sitio web</h1>
-    <img src="imagen-avatar.png" width="250px" height="250px">
+    <div>
+        <h1>Bienvenido a mi sitio web</h1>
+        <img src="imagenes/imagen-avatar.png" width="250px" height="250px" id="avatar">
+        <p>Hola soy María, esta es mi página web con enlaces a mis redes sociales</p>
+        <p>
+            <a href="https://www.instagram.com" target="_blank">
+                <img width="100" height="100" src="imagenes/icono instagram.png" alt="instagram"></a>
+            <a href="https://www.youtube.com" target="_blank">
+                <img width="100" height="100" src="imagenes/icono youtube.png" alt="YouTube"></a>
+            <a href="https://x.com/?lang=es" target="_blank">
+                <img width="100" height="100" src="imagenes/icono twitter.png" alt="Twitter"></a>
+            <a href="https://open.spotify.com" target="_blank">
+                <img width="100" height="100" src="imagenes/icono spotify.png" alt="Spotify"></a>
+        </p>
+    </div>
 </body>
+
 </html>
