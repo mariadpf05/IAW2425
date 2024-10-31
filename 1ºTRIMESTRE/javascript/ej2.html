@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversor</title>
+</head>
+<body>
+    <input type="text" placeholder="Introduce cantidad" id="cantidad">
+    <button onclick="convertirADolares()">Convertir a dolares</button>
+    <button onclick="convertirAEuros">Convertir a euros</button>
+    <p id="resultado"></p>
+    <script>
+        function convertirADolares(){
+            let cantidad = parseFloat(document.getElementById("cantidad").value);
+            document.getElementById("resultado").innerHTML = cantidad * 1.09;
+            document.getElementById("resultado").innerHTML += "dolares";
+        }
+        function convertirAEuros(){
+            let cantidad = parseFloat(document.getElementById("cantidad").value);
+            document.getElementById("resultado").innerHTML = cantidad * 0.92;
+            document.getElementById("resultado").innerHTML += "euros";
+        }
+    </script>
+</body>
+</html>
