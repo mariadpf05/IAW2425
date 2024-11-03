@@ -6,20 +6,31 @@
     <title>Conversor</title>
 </head>
 <body>
-    <input type="text" placeholder="Introduce cantidad" id="cantidad">
-    <button onclick="convertirADolares()">Convertir a dolares</button>
-    <button onclick="convertirAEuros">Convertir a euros</button>
+    <input id="cantidad" type="text" placeholder="Introduce cantidad">
+    <button onclick="convertirADolares()">Convertir a dólares</button>
+    <button onclick="convertirAEuros()">Convertir a euros</button>
     <p id="resultado"></p>
     <script>
-        function convertirADolares(){
+        function convertirADolares() {
             let cantidad = parseFloat(document.getElementById("cantidad").value);
-            document.getElementById("resultado").innerHTML = cantidad * 1.09;
-            document.getElementById("resultado").innerHTML += "dolares";
+            if (esNumeroPositivo(cantidad)) {
+                document.getElementById("resultado").innerHTML = (cantidad * 1.09).toFixed(2) + " dólares";
+            } else {
+                alert("¡Debes introducir un número positivo!");
+            }
         }
-        function convertirAEuros(){
+
+        function convertirAEuros() {
             let cantidad = parseFloat(document.getElementById("cantidad").value);
-            document.getElementById("resultado").innerHTML = cantidad * 0.92;
-            document.getElementById("resultado").innerHTML += "euros";
+            if (esNumeroPositivo(cantidad)) {
+                document.getElementById("resultado").innerHTML = (cantidad * 0.92).toFixed(2) + " euros";
+            } else {
+                alert("¡Debes introducir un número positivo!");
+            }
+        }
+
+        function esNumeroPositivo(x) {
+            return !isNaN(x) && x > 0;
         }
     </script>
 </body>
