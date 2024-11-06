@@ -20,8 +20,8 @@ function validar(elementos){
         estanCorrectos = false;
     }
     if (!validaPasswords()){ // Si no son válidas las contraseñas
-        document.getElementById("campo4").innerHTML = "La contraseña no cumple con requisitos de longitud o no coinciden";        
-        document.getElementById("campo5").innerHTML = "La contraseña no cumple con requisitos de longitud o no coinciden";
+        document.getElementById("campo4").innerHTML = "El PIN no cumple con requisitos de longitud o no coinciden";        
+        document.getElementById("campo5").innerHTML = "El PIN no cumple con requisitos de longitud o no coinciden";
         estanCorrectos = false;
     }
     if (!validarDNI()){
