@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mensajes</title>
+    <script src="mensajes.js"></script>
+    <style>
+        .btn-image {
+            background-size: cover;
+            background-image: url('iconoPapelera.png');
+            width: 65px;
+            height: 65px;
+            float: right;
+        }
+        .tweet {
+            width:500px;
+            height: 80px;
+            border: 1px solid gray;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <input type="text" id="post" placeholder="Escribe post"><button onclick="añadir()">Enviar</button>
+    <p>Pulsa el botón para eliminar un mensaje.</p>
+    <button onclick="ordenar()">Ordenar</button>     
+    <p id="demo"></p>
+</body>
+</html>
