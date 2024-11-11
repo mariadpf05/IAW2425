@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 1 de jQuery</title>
+    <script src="jquery-3.7.1.js.js"></script> <!--Opción local-->
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> Opción remota -->
+
+</head>
+<body>
+    <h1>Ejemplo de jquery</h1>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi obcaecati libero quidem excepturi iure molestiae veniam sint dignissimos quia maxime. Iste magnam corporis qui in velit, fuga quia veritatis possimus?</p>
+    <button id="ocultar">Click para ocultar párrafo con jQuery</button>
+    <button id="mostrar">Click para mostrar párrafo con jQuery</button>
+    <script>
+        $(document).ready(function () {
+            //Cuando se haya cargado el documento por completo
+            $("#ocultar").click(function () {
+                $("p").hide();
+            });
+            $("#mostrar").click(function () {
+                $("p").show();
+            });
+        });
+    </script>
+</body>
+</html>
