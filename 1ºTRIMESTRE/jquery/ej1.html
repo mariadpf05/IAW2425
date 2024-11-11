@@ -10,17 +10,36 @@
 </head>
 <body>
     <h1>Ejemplo de jquery</h1>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi obcaecati libero quidem excepturi iure molestiae veniam sint dignissimos quia maxime. Iste magnam corporis qui in velit, fuga quia veritatis possimus?</p>
+    <p>1 Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi obcaecati libero quidem excepturi iure molestiae veniam sint dignissimos quia maxime. Iste magnam corporis qui in velit, fuga quia veritatis possimus?</p>
+    <p class="par">2 Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio recusandae exercitationem tempore ut provident voluptatem voluptates excepturi commodi cupiditate earum, eum cum assumenda doloribus quos minus! Officia pariatur porro nostrum.</p>
+    <p>3 Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam iste sequi doloribus officia minima, quasi cum deleniti dolorem repellat eligendi cupiditate adipisci veritatis molestiae nemo fuga dignissimos mollitia, accusamus suscipit.</p>
+    <p class="par">4 Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat, recusandae repellat temporibus impedit, eaque saepe laboriosam sequi repudiandae nisi et eius sint earum, nobis reiciendis. Nesciunt voluptas hic exercitationem est?</p>
     <button id="ocultar">Click para ocultar párrafo con jQuery</button>
     <button id="mostrar">Click para mostrar párrafo con jQuery</button>
+    <button id="alternar">Click para alternar con jQuery</button>
     <script>
+//      $(document).ready(function () {
+        //Cuando se haya cargado el documento por completo
+//          $("#ocultar").click(function () {
+//              $("p").hide();
+//          });
+//          $("#mostrar").click(function () {
+//              $("p").show();
+//          });
+//          $("#alternar").click(function () {
+//              $("p").toggle();
+//          });
+//      });
         $(document).ready(function () {
             //Cuando se haya cargado el documento por completo
             $("#ocultar").click(function () {
-                $("p").hide();
+                $("p.par").hide();
             });
             $("#mostrar").click(function () {
-                $("p").show();
+                $(".par").show();
+            });
+            $("#alternar").click(function () {
+                $(".par").toggle();
             });
         });
     </script>
