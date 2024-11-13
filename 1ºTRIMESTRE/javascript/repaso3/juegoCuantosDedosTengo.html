@@ -1,0 +1,28 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>¿Cuántos dedos tengo?</title>
+    </head>
+    <body>
+        <h1>¿Cuántos dedos tengo?</h1>
+        <input type="text" id="numero" placeholder="Número">
+        <button id="compruebaNumero">Comprueba</button>
+        <script type="text/javascript">
+            document.getElementById("compruebaNumero").onclick = function()
+            {
+                var numeroAleatorio = Math.random();
+                // numeroAleatorio contiene un número real entre 0 y 1
+                numeroAleatorio = numeroAleatorio*6; // Ahora está entre 0 y 6
+                numeroAleatorio = Math.floor(numeroAleatorio);
+                if (document.getElementById("numero").value == numeroAleatorio)
+                    {   
+                        alert("Acertaste!! Enhorabuena !!");
+                    }
+                else
+                    {
+                        alert("Mala suerte! El número era "+numeroAleatorio);
+                    }
+            }       
+        </script>
+    </body>
+</html>
