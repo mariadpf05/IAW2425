@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>attr</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#boton1").click(function(){
+                alert("El html del encabezado es:"+$("h1").html());
+        });
+            $("#boton2").click( function(){
+                alert("El src de la imagen es:"+$("img").html())
+        });
+            $("#boton3").click( function(){
+                alert("El html del parrafo es:"+$("h1").html())
+        });
+    });     
+    </script>
+</head>
+<body>
+    <!--Para ilustrar el funcionamiento del método attr de jQuery crea una web con un par de botones 
+    “Obtener scr de la imagen”, “Obtener html del encabezado”, “Obtener html de un párrafo” 
+    que al hacer clic sobre ellos permita visualizar mediante un alert de JavaScript los valores correspondientes.-->
+    <h1>Encabezado</h1>
+    <img src="foto.jpg" alt="Esto es una foto">
+    <p>Lorem, ipsum dolor sit amet <a href="http://www.marca.com" target="_blank">adipisicing elit.</a> Quaerat ipsa, sunt corporis, maiores voluptates porro, animi deleniti tempore fugiat voluptas consequatur cumque facilis beatae nesciunt ullam iste quae excepturi perferendis?</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos recusandae possimus eius quo. Molestias totam nam velit quae assumenda, recusandae, nemo quisquam rerum praesentium dolor odio, delectus nisi dicta atque?</p>
+    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nisi sit corporis repellat, ducimus reprehenderit, doloremque quidem illum nihil ipsam minima unde necessitatibus commodi praesentium iusto, reiciendis provident quod odit nobis!</p>
+    <button id="boton1">Obtener html del Encabezado</button>
+    <button id="boton2">Obtener src de la imagen</button>
+    <button id="boton3">Obtener html de un párrafo</button>
+</body>
+</html>

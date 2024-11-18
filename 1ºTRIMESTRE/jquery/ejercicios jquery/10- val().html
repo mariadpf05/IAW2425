@@ -1,0 +1,31 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+    <!--Realiza un documento web con un campo de tipo input y prueba cómo funciona el método val() de jQuery 
+    visualizando ante el evento click de un botón su valor.-->
+    <h1>Caja de texto</h1>
+    <input type="text" id="caja">
+    <button id="boton">Obtener valor</button>
+    <script>
+        $(document).ready(function () {
+            $("#boton").click(function(){
+                let edad = parseInt($("#caja").val());
+                let texto ="";
+                if(edad>=18)
+                texto="Es mayor de edad";
+                else
+                texto="Es menor de edad"
+                alert(texto)
+                
+            });
+        });
+    </script>
+</body>
+</html>
