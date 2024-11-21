@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario</title>
+</head>
+<body>
+    <h1>Formulario</h1>
+    <input type="text" placeholder="Nombre" id="nombre"required>
+    <span class="mensaje" id="errorNombre"></span><br>
+    <input type="text" placeholder="Apellido 1" id="apellido1"required>
+    <span class="mensaje" id="errorApellido1"></span><br>
+    <input type="text" placeholder="Apellido 2" id="apellido2"required>
+    <span class="mensaje" id="errorApellido2"></span><br>
+    <input type="text" placeholder="DNI: 12345678X" id="dni"required>
+    <span class="mensaje" id="errorDni"></span><br>
+    <input type="email" placeholder="Email" id="correo"required>
+    <span class="mensaje" id="errorCorreo"></span><br>
+    <input type="text" placeholder="Contraseña" id="password1"required>
+    <span class="mensaje" id="errorContra1"></span><br>
+    <input type="text" placeholder="Contraseña" id="password2"required>
+    <span class="mensaje" id="errorContra2"></span><br>
+
+    <label for="">Descripción</label><br>
+    <textarea name="" id=""></textarea><br>
+    <label for="">Fecha de nacimiento</label><br>
+    <input type="date" placeholder="" id="fnac" required><br>
+    <input type="checkbox" name="" id="privacidad" required>
+    <label for="">Acepta política de privacidad</label>
+    <span class="mensaje" id="errorPrivacidad"></span><br>
+    
+    <button>Registrarse</button>
+    <p id="usuario"></p>
+
+    <script>
+        $(document).ready(function () {
+            $("button").click(function () {
+                $("#usuario").empty();
+                let patronEmail = /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
+                let patronContraseña = /^.{8,}$/;
+                let patronDni = /^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKET]$/i;
+                let nombre = $("#nombre").val();
+                let apellido1 = $("#apellido1").val();
+                let apellido2 = $("#apellido2").val();
+                let correo = $("#correo").val();
+                let contra1 = $("#password1").val()
+                let contra2 = $("#password2").val()
+                let privacidad = $("#privacidad").is(":checked")
+                let dni = $("#dni").val()
+
+                if (nombre == "") {
+                    $("#errorNombre").text("Rellenar el campo nombre");
+                }
+                else {
+                    $("#errorNombre").text("");
+                }
+
+                if (apellido1 == "") {
+                    $("#errorApellido1").text("Rellenar el campo apellido 1");
+                }
+                else {
+                    $("#errorApellido1").text("");
+                }
+
+                if (apellido2 == "") {
+                    $("#errorApellido2").text("Rellenar el campo apellido 2");
+                }
+                else {
+                    $("#errorApellido2").text("");
+                }
+
+                if (correo == "") {
+                    $("#errorCorreo").text("Rellenar correo electronico algo@algo.com");
+                }
+                else {
+                    if (!patronEmail.test(correo)) {
+                        $("#errorCorreo").text("Formato no válido de correo");
+                    }
+                    else {
+                        $("#errorCorreo").text("");
+                    }
+                }
+                if (contra1 != contra2) {
+                    $("#errorContra1").text("Las contraseñas deben coincidir")
+                    $("#errorContra2").text("Las contraseñas deben coincidir")
+                }
+                else {
+                    if (!patronContraseña.test(contra1)) {
+                        $("#errorContra1").text("No cumple con los requisitos. Longitud mínima 8 caracteres.")
+                        $("#errorContra2").text("No cumple con los requisitos. Longitud mínima 8 caracteres.")
+                    }
+                    else {
+                        $("#errorContra1").text("");
+                        $("#errorContra2").text("");
+                    }
+                }
+                if (!privacidad) {
+                    $("#errorPrivacidad").text("Debe aceptar la política de privacidad")
+                }
+                else {
+                    $("#errorPrivacidad").text("")
+                }
+
+                if (dni == "") {
+                    $("#errorDni").text("El campo DNI es necesario para completar el formulario");
+                }
+                else {
+                    if (!patronDni.test(dni)) {
+                        $("#errorDni").text("Formato no válido de DNI");
+                    }
+                    else {
+                        $("#errorDni").text("");
+                    }
+                }
+                let mensaje = $(".mensaje").text();
+                if (mensaje == "") {
+                    nombre = nombre.replace(/\s+/g, '');
+                    apellido1 = apellido1.replace(/\s+/g, '');
+                    apellido2 = apellido2.replace(/\s+/g, '');
+                    dni = dni.replace(/\s+/g, '');
+
+                    let n = nombre.charAt(0);
+                    let a1 = apellido1.substr(0, 3);
+                    let a2 = apellido2.substr(0, 3);
+                    let d = dni.substr(-3); 
+                    let usuario = (n + a1 + a2 + d).toLowerCase();
+                    $("#usuario").text("Su usuario es: " + usuario);
+                }
+            })
+        });
+    </script>
+
+</body>
+</html>
