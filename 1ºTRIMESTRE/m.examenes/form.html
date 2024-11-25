@@ -3,23 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario</title>
+    <title>ExamenII Formulario</title>
+    <style>
+        input {
+            margin: 5px 20px;
+        }
+
+        span {
+            color: red;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <link rel="icon" href="#" type="image/x-icon">
 </head>
 <body>
     <h1>Formulario</h1>
-    <input type="text" placeholder="Nombre" id="nombre"required>
+    <input type="text" placeholder="Nombre" id="nombre" required>
     <span class="mensaje" id="errorNombre"></span><br>
-    <input type="text" placeholder="Apellido 1" id="apellido1"required>
+    <input type="text" placeholder="Apellido 1" id="apellido1" required>
     <span class="mensaje" id="errorApellido1"></span><br>
-    <input type="text" placeholder="Apellido 2" id="apellido2"required>
+    <input type="text" placeholder="Apellido 2" id="apellido2" required>
     <span class="mensaje" id="errorApellido2"></span><br>
-    <input type="text" placeholder="DNI: 12345678X" id="dni"required>
+    <input type="text" placeholder="DNI:123456789X" id="dni" required>
     <span class="mensaje" id="errorDni"></span><br>
-    <input type="email" placeholder="Email" id="correo"required>
+    <input type="email" placeholder="Email" id="correo" required>
     <span class="mensaje" id="errorCorreo"></span><br>
-    <input type="text" placeholder="Contraseña" id="password1"required>
+    <input type="password" placeholder="Contraseña" id="password1" required>
     <span class="mensaje" id="errorContra1"></span><br>
-    <input type="text" placeholder="Contraseña" id="password2"required>
+    <input type="password" placeholder="Repite Contraseña" id="password2" required>
     <span class="mensaje" id="errorContra2"></span><br>
 
     <label for="">Descripción</label><br>
@@ -29,10 +41,8 @@
     <input type="checkbox" name="" id="privacidad" required>
     <label for="">Acepta política de privacidad</label>
     <span class="mensaje" id="errorPrivacidad"></span><br>
-    
     <button>Registrarse</button>
     <p id="usuario"></p>
-
     <script>
         $(document).ready(function () {
             $("button").click(function () {
@@ -48,7 +58,6 @@
                 let contra2 = $("#password2").val()
                 let privacidad = $("#privacidad").is(":checked")
                 let dni = $("#dni").val()
-
                 if (nombre == "") {
                     $("#errorNombre").text("Rellenar el campo nombre");
                 }
@@ -74,7 +83,9 @@
                     $("#errorCorreo").text("Rellenar correo electronico algo@algo.com");
                 }
                 else {
+                    //El correo no es la cadena vacía
                     if (!patronEmail.test(correo)) {
+                        //No encaja con el patrón de Email
                         $("#errorCorreo").text("Formato no válido de correo");
                     }
                     else {
@@ -86,6 +97,7 @@
                     $("#errorContra2").text("Las contraseñas deben coincidir")
                 }
                 else {
+                    //Las contraseñas son iguales
                     if (!patronContraseña.test(contra1)) {
                         $("#errorContra1").text("No cumple con los requisitos. Longitud mínima 8 caracteres.")
                         $("#errorContra2").text("No cumple con los requisitos. Longitud mínima 8 caracteres.")
@@ -106,7 +118,9 @@
                     $("#errorDni").text("El campo DNI es necesario para completar el formulario");
                 }
                 else {
+                    //El dni no es la cadena vacía
                     if (!patronDni.test(dni)) {
+                        //No encaja con el patrón de DNI
                         $("#errorDni").text("Formato no válido de DNI");
                     }
                     else {
@@ -115,6 +129,7 @@
                 }
                 let mensaje = $(".mensaje").text();
                 if (mensaje == "") {
+                    // Eliminar espacios en blanco de las cadenas
                     nombre = nombre.replace(/\s+/g, '');
                     apellido1 = apellido1.replace(/\s+/g, '');
                     apellido2 = apellido2.replace(/\s+/g, '');
@@ -123,13 +138,13 @@
                     let n = nombre.charAt(0);
                     let a1 = apellido1.substr(0, 3);
                     let a2 = apellido2.substr(0, 3);
-                    let d = dni.substr(-3); 
-                    let usuario = (n + a1 + a2 + d).toLowerCase();
+                    let d = dni.substr(-3); // Tomar los últimos 3 dígitos del DNI
+                    let usuario = (n + a1 + a2 + d).toLowerCase(); // Convertir a minúsculas
                     $("#usuario").text("Su usuario es: " + usuario);
                 }
             })
         });
     </script>
-
 </body>
+
 </html>
