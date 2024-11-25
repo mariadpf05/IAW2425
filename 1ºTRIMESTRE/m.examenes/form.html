@@ -3,147 +3,219 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ExamenII Formulario</title>
+    <title>Formulario</title>
     <style>
-        input {
-            margin: 5px 20px;
-        }
+        body {
+    font-family: Arial, sans-serif;
+    background-color: #f3f4f6;
+    margin: 0;
+    padding: 0;
+}
 
-        span {
-            color: red;
-        }
+.contenedor-formulario {
+    max-width: 600px;
+    margin: 50px auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+    text-align: center;
+}
+
+.grupo-formulario {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input, textarea, button {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.error {
+    color: red;
+    font-size: 12px;
+}
+
+#nombreUsuarioGenerado {
+    text-align: center;
+    font-size: 18px;
+    margin-top: 20px;
+}
     </style>
     <script src="https://code.jquery.com/jquery-3.7.1.js"
         integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <link rel="icon" href="#" type="image/x-icon">
 </head>
 <body>
-    <h1>Formulario</h1>
-    <input type="text" placeholder="Nombre" id="nombre" required>
-    <span class="mensaje" id="errorNombre"></span><br>
-    <input type="text" placeholder="Apellido 1" id="apellido1" required>
-    <span class="mensaje" id="errorApellido1"></span><br>
-    <input type="text" placeholder="Apellido 2" id="apellido2" required>
-    <span class="mensaje" id="errorApellido2"></span><br>
-    <input type="text" placeholder="DNI:123456789X" id="dni" required>
-    <span class="mensaje" id="errorDni"></span><br>
-    <input type="email" placeholder="Email" id="correo" required>
-    <span class="mensaje" id="errorCorreo"></span><br>
-    <input type="password" placeholder="Contraseña" id="password1" required>
-    <span class="mensaje" id="errorContra1"></span><br>
-    <input type="password" placeholder="Repite Contraseña" id="password2" required>
-    <span class="mensaje" id="errorContra2"></span><br>
-
-    <label for="">Descripción</label><br>
-    <textarea name="" id=""></textarea><br>
-    <label for="">Fecha de nacimiento</label><br>
-    <input type="date" placeholder="" id="fnac" required><br>
-    <input type="checkbox" name="" id="privacidad" required>
-    <label for="">Acepta política de privacidad</label>
-    <span class="mensaje" id="errorPrivacidad"></span><br>
-    <button>Registrarse</button>
-    <p id="usuario"></p>
+    <div class="contenedor-formulario">
+        <h1>Registro de Usuario</h1>
+        <div class="grupo-formulario">
+            <label for="nombre">Nombre *</label>
+            <input type="text" id="nombre" name="nombre">
+            <small class="error" id="error-nombre"></small>
+        </div>
+        <div class="grupo-formulario">
+            <label for="apellido1">Primer Apellido *</label>
+            <input type="text" id="apellido1" name="apellido1">
+            <small class="error" id="error-apellido1"></small>
+        </div>
+        <div class="grupo-formulario">
+            <label for="apellido2">Segundo Apellido *</label>
+            <input type="text" id="apellido2" name="apellido2">
+            <small class="error" id="error-apellido2"></small>
+        </div>
+        <div class="grupo-formulario">
+            <label for="dni">DNI *</label>
+            <input type="text" id="dni" name="dni">
+            <small class="error" id="error-dni"></small>
+        </div>
+        <div class="grupo-formulario">
+            <label for="email">Email *</label>
+            <input type="email" id="email" name="email">
+            <small class="error" id="error-email"></small>
+        </div>
+        <div class="grupo-formulario">
+            <label for="contrasena">Contraseña *</label>
+            <input type="password" id="contrasena" name="contrasena">
+            <small class="error" id="error-contrasena"></small>
+        </div>
+        <div class="grupo-formulario">
+            <label for="confirmarContrasena">Confirmar Contraseña *</label>
+            <input type="password" id="confirmarContrasena" name="confirmarContrasena">
+            <small class="error" id="error-confirmarContrasena"></small>
+        </div>
+        <div class="grupo-formulario">
+            <label for="descripcion">Descripción (opcional)</label>
+            <textarea id="descripcion" name="descripcion"></textarea>
+        </div>
+        <div class="grupo-formulario">
+            <label for="fechaNacimiento">Fecha de Nacimiento (opcional)</label>
+            <input type="date" id="fechaNacimiento" name="fechaNacimiento">
+        </div>
+        <div class="grupo-formulario">
+            <label>
+                Acepto el tratamiento de datos personales *
+                <input type="checkbox" id="aceptarTerminos" name="aceptarTerminos">
+            </label>
+            <small class="error" id="error-terminos"></small>
+        </div>
+        <button id="botonEnviar">Enviar</button>
+        <p id="nombreUsuarioGenerado"></p>
+    </div>
     <script>
-        $(document).ready(function () {
-            $("button").click(function () {
-                $("#usuario").empty();
-                let patronEmail = /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
-                let patronContraseña = /^.{8,}$/;
-                let patronDni = /^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKET]$/i;
-                let nombre = $("#nombre").val();
-                let apellido1 = $("#apellido1").val();
-                let apellido2 = $("#apellido2").val();
-                let correo = $("#correo").val();
-                let contra1 = $("#password1").val()
-                let contra2 = $("#password2").val()
-                let privacidad = $("#privacidad").is(":checked")
-                let dni = $("#dni").val()
-                if (nombre == "") {
-                    $("#errorNombre").text("Rellenar el campo nombre");
-                }
-                else {
-                    $("#errorNombre").text("");
-                }
+        function validarDNI(valor){
+    let valido = false;
+    var validChars = 'TRWAGMYFPDXBNJZSQVHLCKET';
+    var nifRexp = /^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKET]$/i;
+    var nieRexp = /^[XYZ][0-9]{7}[TRWAGMYFPDXBNJZSQVHLCKET]$/i;
+    var str = valor.toString().toUpperCase();
+  
+    if (!nifRexp.test(str) && !nieRexp.test(str))
+        valido = false;
+  
+    var nie = str
+        .replace(/^[X]/, '0')
+        .replace(/^[Y]/, '1')
+        .replace(/^[Z]/, '2');
+  
+    var letter = str.substr(-1);
+    var charIndex = parseInt(nie.substr(0, 8)) % 23;
+  
+    if (validChars.charAt(charIndex) === letter)
+        valido = true;
+  
+    return valido;
+  }
 
-                if (apellido1 == "") {
-                    $("#errorApellido1").text("Rellenar el campo apellido 1");
-                }
-                else {
-                    $("#errorApellido1").text("");
-                }
+// Referencia al botón de envío
+let botonEnviar = document.getElementById('botonEnviar');
 
-                if (apellido2 == "") {
-                    $("#errorApellido2").text("Rellenar el campo apellido 2");
-                }
-                else {
-                    $("#errorApellido2").text("");
-                }
+// Asignar evento al botón
+botonEnviar.addEventListener('click', function () {
 
-                if (correo == "") {
-                    $("#errorCorreo").text("Rellenar correo electronico algo@algo.com");
-                }
-                else {
-                    //El correo no es la cadena vacía
-                    if (!patronEmail.test(correo)) {
-                        //No encaja con el patrón de Email
-                        $("#errorCorreo").text("Formato no válido de correo");
-                    }
-                    else {
-                        $("#errorCorreo").text("");
-                    }
-                }
-                if (contra1 != contra2) {
-                    $("#errorContra1").text("Las contraseñas deben coincidir")
-                    $("#errorContra2").text("Las contraseñas deben coincidir")
-                }
-                else {
-                    //Las contraseñas son iguales
-                    if (!patronContraseña.test(contra1)) {
-                        $("#errorContra1").text("No cumple con los requisitos. Longitud mínima 8 caracteres.")
-                        $("#errorContra2").text("No cumple con los requisitos. Longitud mínima 8 caracteres.")
-                    }
-                    else {
-                        $("#errorContra1").text("");
-                        $("#errorContra2").text("");
-                    }
-                }
-                if (!privacidad) {
-                    $("#errorPrivacidad").text("Debe aceptar la política de privacidad")
-                }
-                else {
-                    $("#errorPrivacidad").text("")
-                }
+    // Limpiar mensajes de error previos
+    let errores = document.querySelectorAll('.error');
+    // El siguiente bucle for limpia los posibles errores de un intento anterior
+    for (let i = 0; i < errores.length; i++) {
+        errores[i].innerHTML = '';
+    }
 
-                if (dni == "") {
-                    $("#errorDni").text("El campo DNI es necesario para completar el formulario");
-                }
-                else {
-                    //El dni no es la cadena vacía
-                    if (!patronDni.test(dni)) {
-                        //No encaja con el patrón de DNI
-                        $("#errorDni").text("Formato no válido de DNI");
-                    }
-                    else {
-                        $("#errorDni").text("");
-                    }
-                }
-                let mensaje = $(".mensaje").text();
-                if (mensaje == "") {
-                    // Eliminar espacios en blanco de las cadenas
-                    nombre = nombre.replace(/\s+/g, '');
-                    apellido1 = apellido1.replace(/\s+/g, '');
-                    apellido2 = apellido2.replace(/\s+/g, '');
-                    dni = dni.replace(/\s+/g, '');
+    // Obtener valores de los campos
+    let nombre = document.getElementById('nombre').value.trim();
+    let apellido1 = document.getElementById('apellido1').value.trim();
+    let apellido2 = document.getElementById('apellido2').value.trim();
+    let dni = document.getElementById('dni').value.trim();
+    let email = document.getElementById('email').value.trim();
+    let contrasena = document.getElementById('contrasena').value;
+    let confirmarContrasena = document.getElementById('confirmarContrasena').value;
+    let aceptarTerminos = document.getElementById('aceptarTerminos').checked;
 
-                    let n = nombre.charAt(0);
-                    let a1 = apellido1.substr(0, 3);
-                    let a2 = apellido2.substr(0, 3);
-                    let d = dni.substr(-3); // Tomar los últimos 3 dígitos del DNI
-                    let usuario = (n + a1 + a2 + d).toLowerCase(); // Convertir a minúsculas
-                    $("#usuario").text("Su usuario es: " + usuario);
-                }
-            })
-        });
+    let esValido = true;
+
+    // Validar campos obligatorios
+    if (nombre == '') {
+        document.getElementById('error-nombre').innerHTML = 'El campo nombre es necesario para completar el formulario';
+        esValido = false;
+    }
+    if (apellido1 == '') {
+        document.getElementById('error-apellido1').innerHTML = 'El campo primer apellido es necesario para completar el formulario';
+        esValido = false;
+    }
+    if (apellido2 == '') {
+        document.getElementById('error-apellido2').innerHTML = 'El campo segundo apellido es necesario para completar el formulario';
+        esValido = false;
+    }
+    if (!validarDNI(dni)) {
+        document.getElementById('error-dni').innerHTML = 'El DNI debe tener 8 dígitos seguidos de una letra';
+        esValido = false;
+    }
+    if (!/^\S+@\S+\.\S+$/.test(email)) {
+        document.getElementById('error-email').innerHTML = 'El email no es válido';
+        esValido = false;
+    }
+    if (contrasena.length < 8) {
+        document.getElementById('error-contrasena').innerHTML = 'La contraseña debe tener al menos 8 caracteres';
+        esValido = false;
+    }
+    if (contrasena != confirmarContrasena) {
+        document.getElementById('error-confirmarContrasena').innerHTML = 'Las contraseñas no coinciden';
+        esValido = false;
+    }
+    if (!aceptarTerminos) {
+        document.getElementById('error-terminos').innerHTML = 'Debe aceptar el tratamiento de datos personales';
+        esValido = false;
+    }
+
+    // Generar nombre de usuario
+    if (esValido) {
+        let nombreUsuario = `${nombre[0]}${apellido1.slice(0, 3)}${apellido2.slice(0, 3)}${dni.slice(-3)}`.toLowerCase().replace(/\s+/g, '');
+        document.getElementById('nombreUsuarioGenerado').innerHTML = `Nombre de usuario generado: ${nombreUsuario}`;
+        alert('Formulario enviado con éxito.');
+    }
+});
     </script>
 </body>
 
