@@ -18,8 +18,8 @@
                     console.log(datos);
                     let imagen = datos.message
                     $("#objetivo").append(
-                                '<p>' + '<img src="' + imagen + '"></p>'
-                            )
+                        '<p>' + '<img src="' + imagen + '"></p>'
+                    )
                 }).fail(function(){
                     $("#objetivo").text("Error en el servidor")
                 })
