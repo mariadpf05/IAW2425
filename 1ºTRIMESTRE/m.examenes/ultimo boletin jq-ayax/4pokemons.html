@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="#" type="image/x-icon">
+    <title>Pokemon</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <style>body{text-align: center;}</style>
+</head>
+<body>
+    <label for="">Dime un pokemon o su número: </label><input type="text" id="pokemon">
+    <button id="ver">Mostrar pokemon</button>
+    <div></div>
+    <script>
+        $(document).ready(function () {
+            $("#ver").click(function () {
+                $("div").text("")
+                let oldid = $("#pokemon").val();
+                id= oldid.toLowerCase()
+                let enlace = "https://pokeapi.co/api/v2/pokemon/" + id
+                $.ajax({
+                    url: enlace, success: function (datos) {
+                        console.log(datos)
+                            let imagen = datos.sprites.front_default;
+                            let nombre = datos.name;
+                            let numero = datos.id;
+                            var estadisticas = [];
+                            //Generamos un bucle que almacene las estadisticas del pokemon
+                            $(datos.stats).each(function(index,estadistica){
+                                estadisticas.push(datos.stats[index].base_stat);
+                            });
+                            $("div").append(
+                                '<p><img src="' + imagen + '"></p>' +
+                                '<p>Nombre: ' + nombre + '</p>' +
+                                '<p>Numero: ' + numero + '</p>' +
+                                '<p>PS: ' + estadisticas[0] + '</p>' +
+                                '<p>Ataque: ' + estadisticas[1] + '</p>' +
+                                '<p>Defensa: ' + estadisticas[2] + '</p>' +
+                                '<p>Ataque esp.: ' + estadisticas[3] + '</p>' +
+                                '<p>Defensa esp: ' + estadisticas[4] + '</p>' +
+                                '<p>Velocidad: ' + estadisticas[5] + '</p>'
+                            )
+                    }
+                }).fail(function () {
+                    $("div").text("Error en el servidor")
+                })
+            })
+        });
+    </script>
+</body>
+</html>
