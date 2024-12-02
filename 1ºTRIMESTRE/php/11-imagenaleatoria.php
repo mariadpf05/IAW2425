@@ -13,7 +13,7 @@
         '3.png',
         '4.png',
     );
-    echo "<img src='".$imagenes[rand(0, 3)]."'"; 
+    echo "<img src='".$imagenes[rand(0, 3)]."'>"; 
     ?>
     </body>
 </html>

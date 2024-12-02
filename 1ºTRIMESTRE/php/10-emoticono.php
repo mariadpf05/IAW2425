@@ -6,12 +6,9 @@
     <title>Emoticono</title>
 </head>
 <body>
-    
-  
-<?php
-$num1 =  rand(128512, 128586);
-
-echo "<p> &#".$num1."</p>";
-?>
+    <?php
+    $num1 =  rand(128512, 128586);
+    echo "<p> &#".$num1."</p>";
+    ?>
 </body>
 </html>
