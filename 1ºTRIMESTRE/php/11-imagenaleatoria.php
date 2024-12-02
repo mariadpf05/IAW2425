@@ -11,7 +11,7 @@
         '1.png',
         '2.png',
         '3.png',
-        '4.png',
+        '4.png'
     );
     echo "<img src='".$imagenes[rand(0, 3)]."'>"; 
     ?>
