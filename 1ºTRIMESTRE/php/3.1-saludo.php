@@ -6,7 +6,7 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="saludo.php" method="POST">
+    <form action="3.1-saludo.php" method="POST">
         <label for="">Introduce tu nombre:</label>
         <input type="text" name="nombre">
         <input type="submit" value="Enviar">
