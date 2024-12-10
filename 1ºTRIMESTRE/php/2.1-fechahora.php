@@ -3,13 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fecha-hora</title>
+    <title>Fecha hora</title>
 </head>
 <body>
+    <h1>Fecha y hora actual</h1>
     <?php
-    $dias = array("Domingo","Lunes","Martes","Miercoles","Jueves","Viernes","Sábado");
-    $meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"); 
-    echo $dias[date('w')]." ".date('d')." de ".$meses[date('n')-1]. " del ".date('Y') ;
+        $locale = 'es_ES'; 
+        // Crea un objeto IntlDateFormatter con la localización y el formato deseado 
+        $formatter = new IntlDateFormatter($locale, IntlDateFormatter::LONG, IntlDateFormatter::NONE, 'Europe/Madrid', IntlDateFormatter::GREGORIAN, 'MMMM'); 
+        // Obtiene la fecha actual 
+        $fechaActual = new DateTime(); 
+        // Formatea la fecha actual para obtener el mes en español 
+        $mesActual = $formatter->format($fechaActual); echo "El mes actual es: $mesActual";
     ?>
 </body>
 </html>
