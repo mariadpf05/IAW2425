@@ -1,30 +1,45 @@
-<!DOCTYPE html>
-<html lang="es">
+<!doctype html>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ejercicio examen</title>
+	<title>Examen</title>
 </head>
 <body>
-<!-- formulario en el que se introduce un número > 0 y genera con ese número una piramide con ese número de filas-->
-    <form id="formulario" action="triangulo.php">
-        <input type="number" name="numero" id="numero" pleaceholder="Introduce un número">
-        <input type="submit" value="Enviar">
-    </form>
-    <?php
-        if (isset($_POST["numero"])){
-            $numero = htmlspecialchars($_POST["numero"]);
-            if ($numero>0){
-                
-            }
-            else {
-                echo "<p>Introduce un número positivo</p>";
-            }
-        }
-    ?>
-
-    <script>
-        
-    </script>
+<h1>Triángulo</h1>
+<form id="formulario" action="triangulo.php">
+	<input type="text" name="numero" id="numero">
+	<input type="submit" value="Enviar">
+</form>
+<?php
+	if (isset($_GET["numero"])){
+		$numero = htmlspecialchars($_GET["numero"]);
+		if ($numero>0 && is_numeric($numero)){
+			for ($i=$numero;$i>=1;$i--)
+			{	
+				for($j=1;$j<=$i;$j++)
+				{
+					echo "* ";
+				}
+				echo "<br>";
+			}
+		}
+		else{
+			echo "<p>Error. Hacker no te saltes el Javascript!</p>";
+		}
+	}
+?>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  document.getElementById("formulario").addEventListener('submit', compruebaNumero); 
+});
+	function compruebaNumero(evento){
+		evento.preventDefault();
+		let numero=parseInt(document.getElementById('numero').value);
+		if (numero<=0 || isNaN(numero)){
+			alert("¡Error!¡Debes escribir número positivo mayor que cero!");
+			return;
+		}
+		this.submit();
+	}
+</script>
 </body>
 </html>
