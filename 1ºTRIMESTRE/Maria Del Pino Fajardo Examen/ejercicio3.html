@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 3</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+</head>
+<body>
+    <h1>Buscador de Gifs</h1>
+    <label for="">¿QuéG IF buscas?</label>
+    <input id="texto" type="text"><br><br>
+    <button id="btn">Buscar</button>
+    <p id="resultado"></p>
+    <script>
+        //2Zwd8X4nCEqHB8KRogp1Y35guU2GnTyJ
+        $(document).ready(function () {
+            $("#btn").click(function () {
+                let texto = $("#texto").val()
+                let url = "https://api.giphy.com/v1/gifs/search?api_key=ZUZ1l02xr13detiufDgaarKeMNrWNZ5V&q=" + texto
+                $.get(url).done(function (datos) {
+                    $("#resultado").empty()
+                    for (var i = 0; i < datos.data.length; i++) {
+                        let titulo = datos.data[i].title
+                        let imagen = datos.data[i].images.original.url
+                        $("#resultado").append("Titulo: " + titulo + "<br>");
+                        $("#resultado").append('<p>' + '<img src="' + imagen + '"></p>');
+                    }
+                }).fail(function () {
+                    $("#resultado").text("Error en el servidor")
+                });
+
+            });
+        });
+    </script>
+</body>
+</html>
