@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #000066;
+            font-family: Arial, sans-serif;
+        }
+
+        .contenedor {
+            text-align: center;
+        }
+
+        .caja {
+            background-color: #fafafa;
+            padding: 50px;
+            border: 3px solid #FFFF00;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #FFFF00;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .botones {
+            display: flex;
+            gap: 20px; /* Espacio entre los botones */
+        }
+
+        button {
+            width: 150px; /* Ajusta el ancho de los botones */
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #000066;
+            color: #FFFF00;
+            font-size: 16px;
+            cursor: pointer;
+            box-shadow: 0 0 10px #FFFF00;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        h3 {
+            color: #000066;
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #000066;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="contenedor">
+        <div class="caja">
+            <h3>IES Antonio Machado</h3>
+            <p>Registro de actividades</p>
+            <div class="botones">
+                <button onclick="window.location.href='http://maria.is-best.net/proyecto/registros.php'">Registrarse</button>
+                <button onclick="window.location.href='http://maria.is-best.net/proyecto/logins.php'">Inicio de Sesión</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
