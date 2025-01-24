@@ -35,19 +35,23 @@
             gap: 20px; /* Espacio entre los botones */
         }
 
-        button {
-            width: 150px; /* Ajusta el ancho de los botones */
+        .botones a {
+            display: inline-block;
+            width: 150px;
             padding: 10px;
             border: none;
             border-radius: 5px;
             background-color: #000066;
             color: #FFFF00;
             font-size: 16px;
+            text-align: center;
+            text-decoration: none;
             cursor: pointer;
             box-shadow: 0 0 10px #FFFF00;
+            transition: background-color 0.3s ease;
         }
 
-        button:hover {
+        .botones a:hover {
             background-color: #0056b3;
         }
 
@@ -68,8 +72,8 @@
             <h3>IES Antonio Machado</h3>
             <p>Registro de actividades</p>
             <div class="botones">
-                <button onclick="window.location.href='http://maria.is-best.net/proyecto/registros.php'">Registrarse</button>
-                <button onclick="window.location.href='http://maria.is-best.net/proyecto/logins.php'">Inicio de Sesión</button>
+                <a href="registros.php">Registrarse</a>
+                <a href="logins.php">Iniciar Sesión</a>
             </div>
         </div>
     </div>

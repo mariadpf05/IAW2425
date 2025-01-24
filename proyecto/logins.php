@@ -1,8 +1,10 @@
 <?php
+session_start();
+
 // Conexión a la base de datos
-$servername = "sql308.thsite.top"; //Nombre del servidor
-$username = "thsi_38097480"; //Nombre de usuario
-$password ="!GlJRfwv"; //Contraseña
+$servername = "sql308.thsite.top"; // Nombre del servidor
+$username = "thsi_38097480"; // Nombre de usuario
+$password = "!GlJRfwv"; // Contraseña
 $database = "thsi_38097480_proyecto";
 $enlace = mysqli_connect($servername, $username, $password, $database);
 
@@ -27,11 +29,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (mysqli_num_rows($resultado) === 1) {
             $usuario = mysqli_fetch_assoc($resultado);
 
-            $password_hashed = crypt($password, $usuario['password']);
-
-            if (hash_equals($usuario['password'], $password_hashed)) {
-                // Inicio de sesión exitoso, redirigir a panel.php
-                header("Location: panel.php");
+            // Verificar la contraseña
+            if (password_verify($password, $usuario['password'])) {
+                // Inicio de sesión exitoso, establecer la variable de sesión
+                $_SESSION['usuarios_nombre'] = $usuario['nombre'];
+                header("Location: gestion.php");
                 exit();
             } else {
                 echo "<script>alert('Error: Contraseña incorrecta.');</script>";
