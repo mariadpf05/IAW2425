@@ -90,6 +90,28 @@ $actividades = mysqli_fetch_all($resultado_actividades, MYSQLI_ASSOC);
             overflow-x: auto;
         }
 
+        .header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .header a {
+            background-color: #000066;
+            color: #FFFF00;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+            box-shadow: 0 0 10px #FFFF00;
+        }
+
+        .header a:hover {
+            background-color: #0056b3;
+        }
+
         h1 {
             color: #000066;
             margin-bottom: 20px;
@@ -137,6 +159,9 @@ $actividades = mysqli_fetch_all($resultado_actividades, MYSQLI_ASSOC);
 </head>
 <body>
     <div class="container">
+        <div class="header">
+            <a href="gestion.php">Gestión</a>
+        </div>
         <h1>Consultar Actividades</h1>
         <table>
             <thead>
