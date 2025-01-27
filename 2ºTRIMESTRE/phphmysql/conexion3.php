@@ -1,7 +1,7 @@
 <?php
 $servername = "sql308.thsite.top"; //Nombre del servidor
 $username = "thsi_38097480"; //Nombre de usuario
-$password ="!GlJRfwv"; //Contraseña
+$password =""; //Contraseña
 
 try {
   $conn = new PDO("mysql:host=$servername;dbname=thsi_38097480_ejemplo", $username, $password);
