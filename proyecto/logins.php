@@ -1,17 +1,7 @@
 <?php
 session_start();
 
-// Conexión a la base de datos
-$servername = "sql308.thsite.top"; // Nombre del servidor
-$username = "thsi_38097480"; // Nombre de usuario
-$password = ""; // Contraseña
-$database = "thsi_38097480_proyecto";
-$enlace = mysqli_connect($servername, $username, $password, $database);
-
-// Verificar conexión
-if (!$enlace) {
-    die("Conexión fallida: " . mysqli_connect_error());
-}
+include "conexion.php";
 
 // Procesar formulario al enviarlo
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
