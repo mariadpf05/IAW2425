@@ -1,6 +1,7 @@
 <?php
 session_start();
 
+// Conexión a la base de datos
 include "conexion.php";
 
 // Procesar formulario al enviarlo
@@ -43,80 +44,25 @@ mysqli_close($enlace);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #000066;
-            font-family: Arial, sans-serif;
-        }
-
-        .login {
-            background-color: #fafafa;
-            padding: 50px;
-            border: 3px solid #FFFF00;
-            border-radius: 10px;
-            box-shadow: 0 0 10px #FFFF00;
-            text-align: center;
-        }
-
-        h1 {
-            color: #000066;
-            margin-bottom: 20px;
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        label {
-            margin-bottom: 5px;
-            color: #000066;
-        }
-
-        input {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-shadow: 0 0 5px #ccc;
-        }
-
-        button {
-            width: 100%;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            background-color: #000066;
-            color: #FFFF00;
-            font-size: 16px;
-            cursor: pointer;
-            box-shadow: 0 0 10px #FFFF00;
-        }
-
-        button:hover {
-            background-color: #0056b3;
-        }
-    </style>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-    <div class="login">
-        <h3>IES Antonio Machado</h3>
-        <form method="POST" action="">
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-
-            <label for="password">Contraseña:</label>
-            <input type="password" id="password" name="password" required>
-
-            <button type="submit">Iniciar sesión</button>
+<body class="d-flex justify-content-center align-items-center vh-100 bg-primary">
+    <div class="bg-light p-5 rounded shadow-lg text-center">
+        <h3 class="text-primary">IES Antonio Machado</h3>
+        <form method="POST" action="" class="text-primary">
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Contraseña:</label>
+                <input type="password" id="password" name="password" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Iniciar sesión</button>
         </form>
     </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

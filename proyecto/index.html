@@ -4,78 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio</title>
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #000066;
-            font-family: Arial, sans-serif;
-        }
-
-        .contenedor {
-            text-align: center;
-        }
-
-        .caja {
-            background-color: #fafafa;
-            padding: 50px;
-            border: 3px solid #FFFF00;
-            border-radius: 10px;
-            box-shadow: 0 0 10px #FFFF00;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .botones {
-            display: flex;
-            gap: 20px; /* Espacio entre los botones */
-        }
-
-        .botones a {
-            display: inline-block;
-            width: 150px;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            background-color: #000066;
-            color: #FFFF00;
-            font-size: 16px;
-            text-align: center;
-            text-decoration: none;
-            cursor: pointer;
-            box-shadow: 0 0 10px #FFFF00;
-            transition: background-color 0.3s ease;
-        }
-
-        .botones a:hover {
-            background-color: #0056b3;
-        }
-
-        h3 {
-            color: #000066;
-            margin-bottom: 10px;
-        }
-
-        p {
-            color: #000066;
-            margin-bottom: 20px;
-        }
-    </style>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-    <div class="contenedor">
-        <div class="caja">
+<body class="d-flex justify-content-center align-items-center vh-100 bg-electric-blue">
+    <div class="bg-white p-4 rounded shadow">
+        <div class="text-center text-gold">
             <h3>IES Antonio Machado</h3>
             <p>Registro de actividades</p>
-            <div class="botones">
-                <a href="registros.php">Registrarse</a>
-                <a href="logins.php">Iniciar Sesión</a>
+            <div class="mt-3">
+                <a href="registros.php" class="btn btn-primary mr-2">Registrarse</a>
+                <a href="logins.php" class="btn btn-secondary">Iniciar Sesión</a>
             </div>
         </div>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
