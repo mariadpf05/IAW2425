@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (password_verify($password, $usuario['password'])) {
                 // Inicio de sesión exitoso, establecer la variable de sesión
                 $_SESSION['usuarios_nombre'] = $usuario['nombre'];
-                header("Location: gestion.php");
+                header("Location: consultar.php");
                 exit();
             } else {
                 echo "<script>alert('Error: Contraseña incorrecta.');</script>";

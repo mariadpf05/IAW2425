@@ -7,6 +7,7 @@ if (!isset($_SESSION['usuarios_nombre'])) {
     exit();
 }
 
+// Conexión a la base de datos
 include "conexion.php";
 
 // Obtener los departamentos
@@ -54,125 +55,48 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Añadir Nueva Actividad</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #000066;
-            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
         }
-
         .container {
-            background-color: #fafafa;
-            padding: 50px;
-            border: 3px solid #FFFF00;
+            margin-top: 50px;
+            background-color: #ffffff;
+            padding: 20px;
             border-radius: 10px;
-            box-shadow: 0 0 10px #FFFF00;
-            text-align: center;
-            width: 90%;
-            max-width: 1200px; /* Aumentar el ancho máximo */
-            overflow-y: auto; /* Permitir desplazamiento vertical */
-            margin: 50px 0; /* Añadir margen arriba y abajo */
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
         }
-
-        .header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px;
-        }
-
-        .header a {
-            background-color: #000066;
-            color: #FFFF00;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            text-decoration: none;
-            font-size: 16px;
-            cursor: pointer;
-            box-shadow: 0 0 10px #FFFF00;
-        }
-
-        .header a:hover {
-            background-color: #0056b3;
-        }
-
-        h1 {
-            color: #000066;
-            margin-bottom: 20px;
-        }
-
-        form {
-            display: flex;
-            flex-wrap: wrap; /* Permitir que los elementos se envuelvan en múltiples líneas */
-            justify-content: space-between; /* Espacio entre los elementos */
-        }
-
         .form-group {
-            display: flex;
-            flex-direction: column;
             margin-bottom: 20px;
-            width: 30%; /* Ajustar el ancho de los grupos de formulario */
         }
-
-        .center-button {
-            width: 100%; /* Ajustar el ancho del botón */
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            background-color: #000066;
-            color: #FFFF00;
-            font-size: 16px;
-            cursor: pointer;
-            box-shadow: 0 0 10px #FFFF00;
-            margin-top: 20px; /* Añadir margen superior */
+        .btn-primary, .btn-secondary {
+            margin-top: 10px;
         }
-
-        .center-button:hover {
-            background-color: #0056b3;
-        }
-
-        label {
-            margin-bottom: 5px;
-            color: #000066;
-        }
-
-        input, select, textarea {
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-shadow: 0 0 5px #ccc;
-        }
-
         .mensaje {
-            color: red;
             margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #d1ecf1;
+            background-color: #d1ecf1;
+            border-radius: 5px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <a href="gestion.php">Gestión</a>
-            <a href="consultar.php">Consultar</a>
-        </div>
-        <h1>Añadir Nueva Actividad</h1>
+        <h1 class="mb-4">Añadir Nueva Actividad</h1>
         <?php if (isset($mensaje)): ?>
-            <div class="mensaje"><?php echo $mensaje; ?></div>
+            <div class="alert alert-info"><?php echo $mensaje; ?></div>
         <?php endif; ?>
         <form method="POST" action="nueva.php">
             <div class="form-group">
                 <label for="titulo">Título:</label>
-                <input type="text" name="titulo" required>
+                <input type="text" class="form-control" id="titulo" name="titulo" required>
             </div>
 
             <div class="form-group">
                 <label for="tipo">Tipo:</label>
-                <select name="tipo" required>
+                <select class="form-control" id="tipo" name="tipo" required>
                     <option value="extraescolar">Extraescolar</option>
                     <option value="complementaria">Complementaria</option>
                 </select>
@@ -180,7 +104,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <div class="form-group">
                 <label for="departamento">Departamento:</label>
-                <select name="departamento" required>
+                <select class="form-control" id="departamento" name="departamento" required>
                     <?php foreach ($departamentos as $departamento): ?>
                         <option value="<?php echo $departamento['id_dept']; ?>"><?php echo $departamento['nom_dept']; ?></option>
                     <?php endforeach; ?>
@@ -189,7 +113,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <div class="form-group">
                 <label for="profesor">Profesor:</label>
-                <select name="profesor" required>
+                <select class="form-control" id="profesor" name="profesor" required>
                     <?php foreach ($profesores as $profesor): ?>
                         <option value="<?php echo $profesor['id_prof']; ?>"><?php echo $profesor['nom_prof']; ?></option>
                     <?php endforeach; ?>
@@ -198,7 +122,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <div class="form-group">
                 <label for="trimestre">Trimestre:</label>
-                <select name="trimestre" required>
+                <select class="form-control" id="trimestre" name="trimestre" required>
                     <option value="primero">Primero</option>
                     <option value="segundo">Segundo</option>
                     <option value="tercero">Tercero</option>
@@ -207,56 +131,60 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <div class="form-group">
                 <label for="fecha_inicio">Fecha de Inicio:</label>
-                <input type="date" name="fecha_inicio" required>
+                <input type="date" class="form-control" id="fecha_inicio" name="fecha_inicio" required>
             </div>
 
             <div class="form-group">
                 <label for="hora_inicio">Hora de Inicio:</label>
-                <input type="time" name="hora_inicio" required>
+                <input type="time" class="form-control" id="hora_inicio" name="hora_inicio" required>
             </div>
 
             <div class="form-group">
                 <label for="fecha_fin">Fecha de Fin:</label>
-                <input type="date" name="fecha_fin" required>
+                <input type="date" class="form-control" id="fecha_fin" name="fecha_fin" required>
             </div>
 
             <div class="form-group">
                 <label for="hora_fin">Hora de Fin:</label>
-                <input type="time" name="hora_fin" required>
+                <input type="time" class="form-control" id="hora_fin" name="hora_fin" required>
             </div>
 
             <div class="form-group">
                 <label for="organizador">Organizador:</label>
-                <input type="text" name="organizador">
+                <input type="text" class="form-control" id="organizador" name="organizador">
             </div>
 
             <div class="form-group">
                 <label for="acompanantes">Acompañantes:</label>
-                <input type="text" name="acompanantes">
+                <input type="text" class="form-control" id="acompanantes" name="acompanantes">
             </div>
 
             <div class="form-group">
                 <label for="ubicacion">Ubicación:</label>
-                <input type="text" name="ubicacion">
-            </div>
-
-            <div class="form-group">
-                <label for="objetivo">Objetivo:</label>
-                <textarea name="objetivo"></textarea>
+                <input type="text" class="form-control" id="ubicacion" name="ubicacion">
             </div>
 
             <div class="form-group">
                 <label for="coste">Coste:</label>
-                <input type="number" step="0.01" name="coste">
+                <input type="number" step="0.01" class="form-control" id="coste" name="coste">
             </div>
 
             <div class="form-group">
                 <label for="total_alumnos">Total de Alumnos:</label>
-                <input type="number" name="total_alumnos">
+                <input type="number" class="form-control" id="total_alumnos" name="total_alumnos">
             </div>
 
-            <button type="submit" class="center-button">Añadir Actividad</button>
+            <div class="form-group">
+                <label for="objetivo">Objetivo:</label>
+                <textarea class="form-control" id="objetivo" name="objetivo"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Añadir Actividad</button>
+            <a href="consultar.php" class="btn btn-secondary">Cancelar</a>
         </form>
     </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
