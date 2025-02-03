@@ -36,7 +36,8 @@ $query_actividades = "
         a.ubicacion,
         a.coste,
         a.total_alumnos,
-        a.objetivo
+        a.objetivo,
+        a.aprobada
     FROM
         actividad a,
         departamento d,
@@ -97,6 +98,7 @@ mysqli_close($enlace);
                     <th><a href="?orden=coste&direccion=<?php echo $direccion == 'asc' ? 'desc' : 'asc'; ?>">Coste</a></th>
                     <th><a href="?orden=total_alumnos&direccion=<?php echo $direccion == 'asc' ? 'desc' : 'asc'; ?>">Total de Alumnos</a></th>
                     <th><a href="?orden=objetivo&direccion=<?php echo $direccion == 'asc' ? 'desc' : 'asc'; ?>">Objetivo</a></th>
+                    <th><a href="?orden=aprobada&direccion=<?php echo $direccion == 'asc' ? 'desc' : 'asc'; ?>">Aprobada</a></th>
                         <th>Acciones</th>
                 </tr>
             </thead>
@@ -118,6 +120,7 @@ mysqli_close($enlace);
                         <td><?php echo htmlspecialchars($actividad['coste']); ?></td>
                         <td><?php echo htmlspecialchars($actividad['total_alumnos']); ?></td>
                         <td><?php echo htmlspecialchars($actividad['objetivo']); ?></td>
+                        <td><?php echo $actividad['aprobada'] ? 'Sí' : 'No'; ?></td>
                         <td>
                             <?php if ($_SESSION['usuarios_roles'] == 'administrador'): ?>
                                 <a href="editar.php?id=<?php echo $actividad['id']; ?>" class="btn btn-primary">Modificar</a>
