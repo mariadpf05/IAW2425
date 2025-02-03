@@ -6,6 +6,10 @@ if (!isset($_SESSION['usuarios_nombre'])) {
     header("Location: logins.php");
     exit();
 }
+if (!isset($_SESSION['usuarios_roles']) || $_SESSION['usuarios_roles'] != 'administrador') {
+    header("Location: consultar.php");
+    exit();
+}                
 
 // Conexión a la base de datos
 include "conexion.php";

@@ -24,6 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (password_verify($password, $usuario['password'])) {
                 // Inicio de sesión exitoso, establecer la variable de sesión
                 $_SESSION['usuarios_nombre'] = $usuario['nombre'];
+                $_SESSION['usuarios_roles'] = $usuario['roles'];
                 header("Location: consultar.php");
                 exit();
             } else {

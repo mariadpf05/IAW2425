@@ -97,7 +97,7 @@ mysqli_close($enlace);
                     <th><a href="?orden=coste&direccion=<?php echo $direccion == 'asc' ? 'desc' : 'asc'; ?>">Coste</a></th>
                     <th><a href="?orden=total_alumnos&direccion=<?php echo $direccion == 'asc' ? 'desc' : 'asc'; ?>">Total de Alumnos</a></th>
                     <th><a href="?orden=objetivo&direccion=<?php echo $direccion == 'asc' ? 'desc' : 'asc'; ?>">Objetivo</a></th>
-                    <th>Acciones</th>
+                        <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -118,13 +118,19 @@ mysqli_close($enlace);
                         <td><?php echo htmlspecialchars($actividad['coste']); ?></td>
                         <td><?php echo htmlspecialchars($actividad['total_alumnos']); ?></td>
                         <td><?php echo htmlspecialchars($actividad['objetivo']); ?></td>
-                        <td><a href="editar.php?id=<?php echo $actividad['id']; ?>" class="btn btn-primary">Modificar</a></td>
+                        <td>
+                            <?php if ($_SESSION['usuarios_roles'] == 'administrador'): ?>
+                                <a href="editar.php?id=<?php echo $actividad['id']; ?>" class="btn btn-primary">Modificar</a>
+                            <?php endif; ?>
+                        </td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
         <a href="nueva.php" class="btn btn-primary">Añadir Actividad</a>
-        <a href="eliminar.php" class="btn btn-danger">Eliminar</a>
+        <?php if ($_SESSION['usuarios_roles'] == 'administrador'): ?>
+            <a href="eliminar.php?id=<?php echo $actividad['id']; ?>" class="btn btn-danger">Eliminar</a>
+        <?php endif; ?>
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
