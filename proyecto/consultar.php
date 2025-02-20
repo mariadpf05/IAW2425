@@ -74,9 +74,13 @@ mysqli_close($enlace);
         .table-container {
             width: 100%;
         }
+        .cerrar {
+            margin: 20px; 
+        }
     </style>
 </head>
 <body>
+    <a href="cerrar.php" class="btn btn-danger cerrar">Cerrar Sesión</a>
     <div class="caja">
         <h1 class="mb-4">Bienvenido, <?php echo htmlspecialchars($_SESSION['usuarios_nombre']); ?>!</h1>
         <h1 class="mb-4">Consultar Actividades</h1>

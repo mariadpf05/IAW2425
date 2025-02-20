@@ -62,6 +62,12 @@ mysqli_close($enlace);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .enlace {
+            text-decoration: none;
+            color: white;
+        }
+    </style>
 </head>
 <body class="d-flex justify-content-center align-items-center vh-100 bg-primary">
     <div class="bg-light p-5 rounded shadow-lg text-center">
@@ -88,7 +94,7 @@ mysqli_close($enlace);
                 <label for="password">Contraseña:</label>
                 <input type="password" id="password" name="password" class="form-control" required>
             </div>
-            <button type="submit" class="btn btn-primary btn-block">Registrar</button>
+            <button type="submit" class="btn btn-primary btn-block"><a href="logins.php" class="enlace">Registrarse</a></button>
         </form>
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
