@@ -14,8 +14,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $email = htmlspecialchars(trim($_POST['email']));
         $password = htmlspecialchars(trim($_POST['password']));
 
-        $query = "SELECT * FROM usuarios WHERE email='$email'";
-        $resultado = mysqli_query($enlace, $query);
+        // Usar sentencias preparadas para prevenir inyecciones SQL
+        $query = "SELECT * FROM usuarios WHERE email=?";
+        $stmt = mysqli_prepare($enlace, $query);
+        mysqli_stmt_bind_param($stmt, "s", $email);
+        mysqli_stmt_execute($stmt);
+        $resultado = mysqli_stmt_get_result($stmt);
 
         if (mysqli_num_rows($resultado) === 1) {
             $usuario = mysqli_fetch_assoc($resultado);
@@ -25,6 +29,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 // Inicio de sesión exitoso, establecer la variable de sesión
                 $_SESSION['usuarios_nombre'] = $usuario['nombre'];
                 $_SESSION['usuarios_roles'] = $usuario['roles'];
+                $_SESSION['ultima_conexion'] = $usuario['ultima_conexion'];
+
+                // Actualizar la última conexión
+                $query_update = "UPDATE usuarios SET ultima_conexion = NOW() WHERE email = ?";
+                $stmt_update = mysqli_prepare($enlace, $query_update);
+                mysqli_stmt_bind_param($stmt_update, "s", $email);
+                mysqli_stmt_execute($stmt_update);
+
                 header("Location: consultar.php");
                 exit();
             } else {
