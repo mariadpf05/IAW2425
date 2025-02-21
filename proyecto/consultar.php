@@ -153,19 +153,23 @@ $ultima_conexion_formateada = $formatter->format($ultima_conexion);
         <table class="table table-bordered table-hover table-striped">
             <thead class="thead-dark">
                 <tr>
-                    <?php
-                    $columnas = [
-                        'titulo', 'tipo', 'departamento', 'profesor', 'trimestre',
-                        'fecha_inicio', 'hora_inicio', 'fecha_fin', 'hora_fin',
-                        'organizador', 'acompanantes', 'ubicacion', 'coste',
-                        'total_alumnos', 'objetivo', 'aprobada'
-                    ];
-                    foreach ($columnas as $columna) {
-                        $direccion_opuesta = $direccion == 'asc' ? 'desc' : 'asc';
-                        echo "<th><a href=\"?orden=$columna&direccion=$direccion_opuesta&pagina=$pagina\">" . ucfirst($columna) . "</a></th>";
-                    }
-                    ?>
-                    <th>Acciones</th>
+                    <th><a href="?orden=titulo&direccion=<?php echo $direccion == 'asc' ? 'desc' : 'asc'; ?>">Título</a></th>
+                    <th><a href="?orden=tipo&direccion=<?php echo $direccion == 'asc' ? 'desc' : 'asc'; ?>">Tipo</a></th>
+                    <th><a href="?orden=departamento&direccion=<?php echo $direccion == 'asc' ? 'desc' : 'asc'; ?>">Departamento</a></th>
+                    <th><a href="?orden=profesor&direccion=<?php echo $direccion == 'asc' ? 'desc' : 'asc'; ?>">Profesor</a></th>
+                    <th><a href="?orden=trimestre&direccion=<?php echo $direccion == 'asc' ? 'desc' : 'asc'; ?>">Trimestre</a></th>
+                    <th><a href="?orden=fecha_inicio&direccion=<?php echo $direccion == 'asc' ? 'desc' : 'asc'; ?>">Fecha de Inicio</a></th>
+                    <th><a href="?orden=hora_inicio&direccion=<?php echo $direccion == 'asc' ? 'desc' : 'asc'; ?>">Hora de Inicio</a></th>
+                    <th><a href="?orden=fecha_fin&direccion=<?php echo $direccion == 'asc' ? 'desc' : 'asc'; ?>">Fecha de Fin</a></th>
+                    <th><a href="?orden=hora_fin&direccion=<?php echo $direccion == 'asc' ? 'desc' : 'asc'; ?>">Hora de Fin</a></th>
+                    <th><a href="?orden=organizador&direccion=<?php echo $direccion == 'asc' ? 'desc' : 'asc'; ?>">Organizador</a></th>
+                    <th><a href="?orden=acompanantes&direccion=<?php echo $direccion == 'asc' ? 'desc' : 'asc'; ?>">Acompañantes</a></th>
+                    <th><a href="?orden=ubicacion&direccion=<?php echo $direccion == 'asc' ? 'desc' : 'asc'; ?>">Ubicación</a></th>
+                    <th><a href="?orden=coste&direccion=<?php echo $direccion == 'asc' ? 'desc' : 'asc'; ?>">Coste</a></th>
+                    <th><a href="?orden=total_alumnos&direccion=<?php echo $direccion == 'asc' ? 'desc' : 'asc'; ?>">Total de Alumnos</a></th>
+                    <th><a href="?orden=objetivo&direccion=<?php echo $direccion == 'asc' ? 'desc' : 'asc'; ?>">Objetivo</a></th>
+                    <th><a href="?orden=aprobada&direccion=<?php echo $direccion == 'asc' ? 'desc' : 'asc'; ?>">Aprobada</a></th>
+                        <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -190,7 +194,6 @@ $ultima_conexion_formateada = $formatter->format($ultima_conexion);
                         <td>
                             <?php if ($_SESSION['usuarios_roles'] == 'administrador'): ?>
                                 <a href="editar.php?id=<?php echo $actividad['id']; ?>" class="btn btn-primary">Modificar</a>
-                                <a href="eliminar.php?id=<?php echo $actividad['id']; ?>" class="btn btn-danger">Eliminar</a>
                             <?php endif; ?>
                         </td>
                     </tr>
