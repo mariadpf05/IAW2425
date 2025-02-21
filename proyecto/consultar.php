@@ -50,13 +50,13 @@ $query_actividades = "
         a.objetivo,
         a.aprobada
     FROM
-        actividad a
-    JOIN
-        departamento d ON a.departamento_id = d.id_dept
-    JOIN
-        profesor p ON a.profesor_id = p.id_prof
-    ORDER BY $orden $direccion
-    LIMIT $inicio, $actividades_por_pagina;
+        actividad a,
+        departamento d,
+        profesor p
+    WHERE
+        a.profesor_id = p.id_prof AND
+        a.departamento_id = d.id_dept
+    ORDER BY $orden $direccion;
 ";
 $resultado_actividades = mysqli_query($enlace, $query_actividades);
 $actividades = mysqli_fetch_all($resultado_actividades, MYSQLI_ASSOC);
