@@ -1,0 +1,46 @@
+/* Estilos para el modo oscuro */
+.modo-oscuro {
+    background-color: #121212; /* Fondo oscuro para el body */
+    color: #ffffff; /* Letras blancas para el body */
+}
+
+/* Tabla */
+.modo-oscuro .table {
+    background-color: #1f1f1f; /* Fondo oscuro para la tabla */
+    color: #ffffff; /* Letras blancas para la tabla */
+}
+
+/* Celdas de la tabla */
+.modo-oscuro tbody tr td {
+    color: #ffffff !important; /* Letras blancas para las celdas */
+}
+
+/* Botones */
+.modo-oscuro .btn {
+    background-color: #4f4f4f; /* Fondo oscuro para los botones */
+    color: #ffffff; /* Letras blancas para los botones */
+}
+
+/* Cards */
+.modo-oscuro .card {
+    background-color: #2c2c2c; /* Fondo oscuro para las cards */
+    color: #ffffff; /* Letras blancas para las cards */
+}
+
+/* Encabezados de la tabla */
+.modo-oscuro .thead-dark th {
+    background-color: #444444; /* Fondo oscuro para los encabezados */
+    color: #ffffff; /* Letras blancas para los encabezados */
+}
+
+/* Paginación */
+.modo-oscuro .pagination .page-item.active .page-link {
+    background-color: #555555; /* Fondo oscuro para la paginación activa */
+    border-color: #555555;
+}
+
+.modo-oscuro .pagination .page-link {
+    color: #ffffff; /* Letras blancas para la paginación */
+    background-color: #333333; /* Fondo oscuro para la paginación */
+    border-color: #444444;
+}
