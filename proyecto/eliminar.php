@@ -9,29 +9,36 @@ if (!isset($_SESSION['usuarios_nombre'])) {
 if (!isset($_SESSION['usuarios_roles']) || $_SESSION['usuarios_roles'] != 'administrador') {
     header("Location: consultar.php");
     exit();
-}                
+}
 
 // Conexión a la base de datos
 include "conexion.php";
 
 // Procesar la eliminación de actividades seleccionadas
 if (isset($_POST['eliminar_seleccionadas'])) {
-    $ids_actividades = $_POST['actividades'];
+    $ids_actividades = $_POST['actividades'] ?? [];
     if (!empty($ids_actividades)) {
-        $query_eliminar = "DELETE FROM actividad WHERE id IN (" . implode(",", array_map('intval', $ids_actividades)) . ")";
+        // Convertir todos los IDs a enteros para mayor seguridad
+        $ids_actividades = array_map('intval', $ids_actividades);
+
+        // Crear la consulta de eliminación
+        $query_eliminar = "DELETE FROM actividad WHERE id IN (" . implode(",", $ids_actividades) . ")";
         if (mysqli_query($enlace, $query_eliminar)) {
             header("Location: eliminar.php");
             exit();
         } else {
             echo "Error al eliminar las actividades: " . mysqli_error($enlace);
         }
+    } else {
+        // Mensaje de advertencia si no se selecciona ninguna actividad
+        echo "<div class='alert alert-warning' role='alert'>No se ha seleccionado ninguna actividad para eliminar.</div>";
     }
 }
 
 // Obtener las actividades
 $query_actividades = "
     SELECT
-         a.id,
+        a.id,
         a.titulo,
         a.tipo,
         d.nom_dept AS departamento,
@@ -131,7 +138,6 @@ mysqli_close($enlace);
             </table>
             <button type="submit" name="eliminar_seleccionadas" class="btn btn-danger">Eliminar Seleccionadas</button>
             <a href="consultar.php" class="btn btn-secondary">Cancelar</a>
-
         </form>
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

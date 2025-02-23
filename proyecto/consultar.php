@@ -18,6 +18,18 @@ if (!$enlace) {
 $orden = isset($_GET['orden']) ? $_GET['orden'] : 'titulo';
 $direccion = isset($_GET['direccion']) && $_GET['direccion'] === 'desc' ? 'desc' : 'asc';
 
+// Asegurarse de que el nombre de la columna sea seguro
+$columnas_validas = [
+    'titulo', 'tipo', 'departamento', 'profesor', 'trimestre',
+    'fecha_inicio', 'hora_inicio', 'fecha_fin', 'hora_fin',
+    'organizador', 'acompanantes', 'ubicacion', 'coste',
+    'total_alumnos', 'objetivo', 'aprobada'
+];
+
+if (!in_array($orden, $columnas_validas)) {
+    $orden = 'titulo'; // Valor predeterminado si el nombre de la columna no es válido
+}
+
 // Obtener el parámetro de página
 $pagina = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
 $actividades_por_pagina = 5;
@@ -29,7 +41,7 @@ $resultado_total_actividades = mysqli_query($enlace, $query_total_actividades);
 $total_actividades = mysqli_fetch_assoc($resultado_total_actividades)['total'];
 $total_paginas = ceil($total_actividades / $actividades_por_pagina);
 
-// Obtener las actividades
+// Obtener las actividades para la página actual
 $query_actividades = "
     SELECT
         a.id,
@@ -56,7 +68,8 @@ $query_actividades = "
     WHERE
         a.profesor_id = p.id_prof AND
         a.departamento_id = d.id_dept
-    ORDER BY $orden $direccion;
+    ORDER BY `$orden` $direccion
+    LIMIT $actividades_por_pagina OFFSET $inicio;
 ";
 $resultado_actividades = mysqli_query($enlace, $query_actividades);
 $actividades = mysqli_fetch_all($resultado_actividades, MYSQLI_ASSOC);
@@ -169,7 +182,7 @@ $ultima_conexion_formateada = $formatter->format($ultima_conexion);
                     <th><a href="?orden=total_alumnos&direccion=<?php echo $direccion == 'asc' ? 'desc' : 'asc'; ?>">Total de Alumnos</a></th>
                     <th><a href="?orden=objetivo&direccion=<?php echo $direccion == 'asc' ? 'desc' : 'asc'; ?>">Objetivo</a></th>
                     <th><a href="?orden=aprobada&direccion=<?php echo $direccion == 'asc' ? 'desc' : 'asc'; ?>">Aprobada</a></th>
-                        <th>Acciones</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -228,6 +241,9 @@ $ultima_conexion_formateada = $formatter->format($ultima_conexion);
         </nav>
 
         <a href="nueva.php" class="btn btn-primary">Añadir Actividad</a>
+        <?php if ($_SESSION['usuarios_roles'] == 'administrador'): ?>
+            <a href="eliminar.php" class="btn btn-danger">Eliminar Actividad</a>
+        <?php endif; ?>
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
