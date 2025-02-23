@@ -10,6 +10,7 @@ if (!isset($_SESSION['usuarios_roles']) || $_SESSION['usuarios_roles'] != 'admin
     header("Location: consultar.php");
     exit();
 }
+
 // Conexión a la base de datos
 include "conexion.php";
 
@@ -53,30 +54,41 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $objetivo = $_POST['objetivo'];
     $aprobada = $_POST['aprobada'];
 
-    include "conexion.php";
-    $update_query = "UPDATE actividad SET
-        titulo = '$titulo',
-        tipo = '$tipo',
-        departamento_id = '$departamento_id',
-        profesor_id = '$profesor_id',
-        trimestre = '$trimestre',
-        fecha_inicio = '$fecha_inicio',
-        hora_inicio = '$hora_inicio',
-        fecha_fin = '$fecha_fin',
-        hora_fin = '$hora_fin',
-        organizador = '$organizador',
-        acompanantes = '$acompanantes',
-        ubicacion = '$ubicacion',
-        coste = '$coste',
-        total_alumnos = '$total_alumnos',
-        objetivo = '$objetivo',
-        aprobada = '$aprobada'
-        WHERE id = $actividad_id";
+    // Validar que el coste no sea negativo
+    if ($coste < 0) {
+        $mensaje = "El coste no puede ser negativo.";
+        $error_coste = true;
+    }
+    // Validar que la fecha de finalización no sea anterior a la fecha de inicio
+    elseif (strtotime($fecha_fin . ' ' . $hora_fin) <= strtotime($fecha_inicio . ' ' . $hora_inicio)) {
+        $mensaje = "La fecha de finalización no puede ser anterior a la fecha de inicio.";
+        $error_fecha = true;
+    } else {
+        include "conexion.php";
+        $update_query = "UPDATE actividad SET
+            titulo = '$titulo',
+            tipo = '$tipo',
+            departamento_id = '$departamento_id',
+            profesor_id = '$profesor_id',
+            trimestre = '$trimestre',
+            fecha_inicio = '$fecha_inicio',
+            hora_inicio = '$hora_inicio',
+            fecha_fin = '$fecha_fin',
+            hora_fin = '$hora_fin',
+            organizador = '$organizador',
+            acompanantes = '$acompanantes',
+            ubicacion = '$ubicacion',
+            coste = '$coste',
+            total_alumnos = '$total_alumnos',
+            objetivo = '$objetivo',
+            aprobada = '$aprobada'
+            WHERE id = $actividad_id";
 
-    mysqli_query($enlace, $update_query);
-    mysqli_close($enlace);
-    header("Location: consultar.php");
-    exit();
+        mysqli_query($enlace, $update_query);
+        mysqli_close($enlace);
+        header("Location: consultar.php");
+        exit();
+    }
 }
 ?>
 
@@ -87,6 +99,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Actividad</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <style>
         body {
             background-color: #f8f9fa;
@@ -122,11 +135,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             background-color: #d1ecf1;
             border-radius: 5px;
         }
+        .error {
+            border-color: red;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1 class="mb-4">Editar Actividad</h1>
+        <?php if (isset($mensaje)): ?>
+            <div class="alert alert-info"><?php echo $mensaje; ?></div>
+        <?php endif; ?>
         <form method="POST" action="editar.php?id=<?php echo $actividad['id']; ?>">
             <div class="form-group">
                 <label for="titulo">Título:</label>
@@ -163,19 +182,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <option value="tercero" <?php if ($actividad['trimestre'] == 'tercero') echo 'selected'; ?>>Tercero</option>
                 </select>
             </div>
-            <div class="form-group">
+            <div class="form-group <?php if (isset($error_fecha)) echo 'error'; ?>">
                 <label for="fecha_inicio">Fecha de Inicio:</label>
-                <input type="date" class="form-control" id="fecha_inicio" name="fecha_inicio" value="<?php echo htmlspecialchars($actividad['fecha_inicio']); ?>" required>
+                <input type="text" class="form-control" id="fecha_inicio" name="fecha_inicio" value="<?php echo htmlspecialchars($actividad['fecha_inicio']); ?>" required>
             </div>
-            <div class="form-group">
+            <div class="form-group <?php if (isset($error_fecha)) echo 'error'; ?>">
                 <label for="hora_inicio">Hora de Inicio:</label>
                 <input type="time" class="form-control" id="hora_inicio" name="hora_inicio" value="<?php echo htmlspecialchars($actividad['hora_inicio']); ?>" required>
             </div>
-            <div class="form-group">
+            <div class="form-group <?php if (isset($error_fecha)) echo 'error'; ?>">
                 <label for="fecha_fin">Fecha de Fin:</label>
-                <input type="date" class="form-control" id="fecha_fin" name="fecha_fin" value="<?php echo htmlspecialchars($actividad['fecha_fin']); ?>" required>
+                <input type="text" class="form-control" id="fecha_fin" name="fecha_fin" value="<?php echo htmlspecialchars($actividad['fecha_fin']); ?>" required>
             </div>
-            <div class="form-group">
+            <div class="form-group <?php if (isset($error_fecha)) echo 'error'; ?>">
                 <label for="hora_fin">Hora de Fin:</label>
                 <input type="time" class="form-control" id="hora_fin" name="hora_fin" value="<?php echo htmlspecialchars($actividad['hora_fin']); ?>" required>
             </div>
@@ -191,31 +210,55 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <label for="ubicacion">Ubicación:</label>
                 <input type="text" class="form-control" id="ubicacion" name="ubicacion" value="<?php echo htmlspecialchars($actividad['ubicacion']); ?>">
             </div>
-            <div class="form-group">
+            <div class="form-group <?php if (isset($error_coste)) echo 'error'; ?>">
                 <label for="coste">Coste:</label>
-                <input type="text" class="form-control" id="coste" name="coste" value="<?php echo htmlspecialchars($actividad['coste']); ?>">
+                <input type="number" step="0.01" class="form-control" id="coste" name="coste" value="<?php echo htmlspecialchars($actividad['coste']); ?>">
             </div>
             <div class="form-group">
                 <label for="total_alumnos">Total Alumnos:</label>
-                <input type="text" class="form-control" id="total_alumnos" name="total_alumnos" value="<?php echo htmlspecialchars($actividad['total_alumnos']); ?>">
+                <input type="number" class="form-control" id="total_alumnos" name="total_alumnos" value="<?php echo htmlspecialchars($actividad['total_alumnos']); ?>">
             </div>
             <div class="form-group">
                 <label for="objetivo">Objetivo:</label>
                 <input type="text" class="form-control" id="objetivo" name="objetivo" value="<?php echo htmlspecialchars($actividad['objetivo']); ?>">
             </div>
             <div class="form-group">
-                    <label for="aprobada">Aprobada:</label>
-                    <select class="form-control" id="aprobada" name="aprobada">
-                        <option value="1" <?php if ($actividad['aprobada']) echo 'selected'; ?>>Sí</option>
-                        <option value="0" <?php if (!$actividad['aprobada']) echo 'selected'; ?>>No</option>
-                    </select>
-                </div>
+                <label for="aprobada">Aprobada:</label>
+                <select class="form-control" id="aprobada" name="aprobada">
+                    <option value="1" <?php if ($actividad['aprobada']) echo 'selected'; ?>>Sí</option>
+                    <option value="0" <?php if (!$actividad['aprobada']) echo 'selected'; ?>>No</option>
+                </select>
+            </div>
             <button type="submit" class="btn btn-primary">Guardar cambios</button>
             <a href="consultar.php" class="btn btn-secondary">Cancelar</a>
         </form>
     </div>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        $(function() {
+            // Configurar el datepicker para la fecha de inicio
+            $("#fecha_inicio").datepicker({
+                dateFormat: "yy-mm-dd",
+                minDate: 0 // No se pueden seleccionar días anteriores a hoy
+            });
+
+            // Configurar el datepicker para la fecha de fin
+            $("#fecha_fin").datepicker({
+                dateFormat: "yy-mm-dd",
+                minDate: 0 // No se pueden seleccionar días anteriores a hoy
+            });
+
+            // Actualizar la fecha mínima de la fecha de fin cuando cambia la fecha de inicio
+            $("#fecha_inicio").on("change", function() {
+                var fechaInicio = $(this).datepicker("getDate");
+                if (fechaInicio) {
+                    $("#fecha_fin").datepicker("option", "minDate", fechaInicio);
+                }
+            });
+        });
+    </script>
 </body>
 </html>

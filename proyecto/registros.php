@@ -45,6 +45,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     } else {
                         $error = "Usuario registrado, pero no se pudo enviar el correo.";
                     }
+
+                    // Redirigir a logins.php después de registrar al usuario
+                    header("Location: logins.php");
+                    exit();
                 } else {
                     $error = "Error al registrar el usuario: " . mysqli_error($enlace);
                 }
@@ -94,7 +98,7 @@ mysqli_close($enlace);
                 <label for="password">Contraseña:</label>
                 <input type="password" id="password" name="password" class="form-control" required>
             </div>
-            <button type="submit" class="btn btn-primary btn-block"><a href="logins.php" class="enlace">Registrarse</a></button>
+            <button type="submit" class="btn btn-primary btn-block">Registrarse</button>
         </form>
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
