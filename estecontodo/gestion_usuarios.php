@@ -1,6 +1,8 @@
 <?php
 session_start();
-
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL & ~E_DEPRECATED & ~E_NOTICE);
 // Verificar si la sesión está iniciada y si el usuario es administrador
 if (!isset($_SESSION['usuarios_nombre']) || $_SESSION['usuarios_roles'] !== 'administrador') {
     header("Location: login.php");

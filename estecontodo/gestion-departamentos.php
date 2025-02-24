@@ -1,6 +1,8 @@
 <?php
 session_start();
-
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL & ~E_DEPRECATED & ~E_NOTICE);
 // Verificar si el usuario es administrador
 if ($_SESSION['usuarios_roles'] != 'administrador') {
     header("Location: index.php"); // Redirigir si no es administrador
