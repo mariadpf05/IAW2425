@@ -93,7 +93,7 @@ $total_pendientes = mysqli_fetch_assoc($resultado_pendientes)['total'];
 
 mysqli_close($enlace);
 
-// Establecer el huso horario de España
+// Establecer el uso horario de España
 date_default_timezone_set('Europe/Madrid');
 
 // Formatear la última conexión en español
