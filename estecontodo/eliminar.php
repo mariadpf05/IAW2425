@@ -36,6 +36,9 @@ if (isset($_POST['eliminar_seleccionadas'])) {
         echo "<div class='alert alert-warning' role='alert'>No se ha seleccionado ninguna actividad para eliminar.</div>";
     }
 }
+// Registrar el acceso en el archivo de logs
+$eliminar_message = date('Y-m-d H:i:s') . " - Usuario: " . $_SESSION['usuarios_nombre'] . " eliminó la(s) actividad(es): ." . PHP_EOL;
+file_put_contents('eliminadas.txt', $eliminar_message, FILE_APPEND);
 
 // Obtener las actividades
 $query_actividades = "
