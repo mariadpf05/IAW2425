@@ -37,7 +37,7 @@ if (isset($_POST['eliminar_seleccionadas'])) {
     }
 }
 // Registrar la eliminacion en el archivo de eliminadas
-$eliminar_message = date('Y-m-d H:i:s') . " - Usuario: " . $_SESSION['usuarios_nombre'] . " eliminó la(s) actividad(es): " . $_POST['eliminar_seleccionadas'] "." . PHP_EOL;
+$eliminar_message = date('Y-m-d H:i:s') . " - Usuario: " . $_SESSION['usuarios_nombre'] . " eliminó la(s) actividad(es): " . PHP_EOL;
 file_put_contents('eliminadas.txt', $eliminar_message, FILE_APPEND);
 
 // Obtener las actividades
