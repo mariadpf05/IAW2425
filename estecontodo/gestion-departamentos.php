@@ -62,6 +62,8 @@ $departamentos = mysqli_fetch_all($resultado_departamentos, MYSQLI_ASSOC);
     </style>
 </head>
 <body>
+    <a href="consultar.php" class="btn btn-primary m-3">Volver a Gestión de Actividades</a>
+
         <h1 class="mb-4">Eliminar Departamentos</h1>
 
         <!-- Mostrar mensajes de éxito o error -->
@@ -92,9 +94,6 @@ $departamentos = mysqli_fetch_all($resultado_departamentos, MYSQLI_ASSOC);
             </tbody>
         </table>
 
-        <!-- Enlace para volver a la página principal -->
-    <a href="consultar.php" class="btn btn-primary m-3">Volver a Gestión de Actividades</a>
-    <!-- Scripts de Bootstrap -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
