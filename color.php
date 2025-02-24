@@ -1,25 +1,18 @@
 <?php
-if ( isset( $_COOKIE[ 'color' ] ) ) {
-
-    setcookie( 'color', $_COOKIE[ 'color' ] + 1, time() + 3600 * 24, httponly:true );
-    setcookie('lang', $_SERVER['HTTP_ACCEPT_LANGUAGE'], time()+3600*24, httponly:true);
-    $mensaje = 'Numero de color: '.$_COOKIE[ 'color' ]. " usando el idioma " .$_COOKIE['lang'];
-}
-else {
-
-    setcookie( 'color', 1, time() + 3600 * 24, httponly:true );
-    $mensaje = 'Bienvenido por primera vez a nuesta web' . " usando el idioma " .$_COOKIE['lang'];
-}
-//Esto froma parte de la cabecera
+  setcookie("color", $_REQUEST["cambio"], time() + 60 * 60 * 24 * 365, "/");
 ?>
-<html>
-    <head>
-        <title>Cookie</title>
-    </head>
-    <body>
-        <p>
-            <?php     print_r($mensaje);?>
-            
-        </p>    
-    </body>
-</html> 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cookie</title>
+</head>
+<body <?php if (isset($_COOKIE['color'])) echo " style=\"background:$_COOKIE[color]\"" ?>>
+<form action="color.php" method="post">
+    Seleccione de que color desea que sea la página de ahora en más:<br>
+    <input type="color" value="rojo" name="cambio"><br>
+    <input type="submit" value="Cambiar color">
+  </form>
+</body>
+</html>

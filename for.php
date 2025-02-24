@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Tabla de multiplicar - Versión 2</title>
+    <title>Tabla de multiplicar</title>
   </head>
   <body>
 
