@@ -61,7 +61,7 @@ mysqli_close($enlace);
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-light">
+<body>
     <a href="consultar.php" class="btn btn-primary m-3">Volver a Gestión de Actividades</a>
 
     <h1 class="mb-4">Gestión de Usuarios</h1>
