@@ -3,6 +3,7 @@ session_start();
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL & ~E_DEPRECATED & ~E_NOTICE);
+
 // Conexión a la base de datos
 include "conexion.php";
 
@@ -28,8 +29,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             // Verificar la contraseña
             if (password_verify($password, $usuario['password'])) {
-                // Inicio de sesión exitoso, establecer la variable de sesión
+                // Inicio de sesión exitoso, establecer las variables de sesión
                 $_SESSION['usuarios_nombre'] = $usuario['nombre'];
+                $_SESSION['usuarios_email'] = $usuario['email']; // Establecer el correo electrónico
                 $_SESSION['usuarios_roles'] = $usuario['roles'];
                 $_SESSION['ultima_conexion'] = $usuario['ultima_conexion'];
 

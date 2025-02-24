@@ -3,6 +3,7 @@ session_start();
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL & ~E_DEPRECATED & ~E_NOTICE);
+
 // Verificar si la sesión está iniciada
 if (!isset($_SESSION['usuarios_nombre'])) {
     header("Location: login.php");
@@ -129,7 +130,7 @@ $ip_usuario = $_SERVER['REMOTE_ADDR'];
     <a href="descargar_actividades.php" class="btn btn-warning m-3">Descargar actividades</a>
     <button id="modo-oscuro" class="btn btn-secondary m-3">Modo Oscuro</button>
     <h1 class="mb-4">
-        Bienvenido, <?php echo htmlspecialchars($_SESSION['usuarios_nombre']); ?>, se conectó por última vez el <?php echo $ultima_conexion_formateada; ?> con la IP: <?php echo $ip_usuario; ?>.
+        Bienvenido, <?php echo htmlspecialchars($_SESSION['usuarios_nombre']); ?> con el correo <?php echo htmlspecialchars($_SESSION['usuarios_email']); ?>, se conectó por última vez el <?php echo $ultima_conexion_formateada; ?> con la IP: <?php echo $ip_usuario; ?>.
     </h1>
     <h1 class="mb-4">Consultar Actividades</h1>
 
