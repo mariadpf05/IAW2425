@@ -38,12 +38,12 @@ if (isset($_GET['eliminar'])) {
 }
 
 // Procesar cambio de contraseña
-if (isset($_POST['cambiar_oassword'])) {
+if (isset($_POST['cambiar_password'])) {
     $usuario_id = intval($_POST['usuario_id']);
-    $nueva_oassword = password_hash($_POST['nueva_oassword'], PASSWORD_DEFAULT);
+    $nueva_password = password_hash($_POST['nueva_password'], PASSWORD_DEFAULT);
 
-    $query_cambiar_oassword = "UPDATE usuarios SET oassword = '$nueva_oassword' WHERE id = $usuario_id;";
-    mysqli_query($enlace, $query_cambiar_oassword);
+    $query_cambiar_password = "UPDATE usuarios SET password = '$nueva_password' WHERE id = $usuario_id;";
+    mysqli_query($enlace, $query_cambiar_password);
 
     header("Location: gestion_usuarios.php");
     exit();
@@ -80,17 +80,17 @@ mysqli_close($enlace);
                     <td><?php echo htmlspecialchars($usuario['nombre']); ?></td>
                     <td><?php echo htmlspecialchars($usuario['roles']); ?></td>
                     <td>
-                        <button class="btn btn-warning" data-toggle="modal" data-target="#cambiaroasswordModal<?php echo $usuario['id']; ?>">Cambiar Contraseña</button>
+                        <button class="btn btn-warning" data-toggle="modal" data-target="#cambiarpasswordModal<?php echo $usuario['id']; ?>">Cambiar Contraseña</button>
                         <a href="?eliminar=<?php echo $usuario['id']; ?>" class="btn btn-danger" onclick="return confirm('¿Estás seguro de eliminar este usuario?');">Eliminar</a>
                     </td>
                 </tr>
 
                 <!-- Modal para cambiar contraseña -->
-                <div class="modal fade" id="cambiaroasswordModal<?php echo $usuario['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="cambiaroasswordModalLabel" aria-hidden="true">
+                <div class="modal fade" id="cambiarpasswordModal<?php echo $usuario['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="cambiarpasswordModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="cambiaroasswordModalLabel">Cambiar Contraseña</h5>
+                                <h5 class="modal-title" id="cambiarpasswordModalLabel">Cambiar Contraseña</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -99,10 +99,10 @@ mysqli_close($enlace);
                                 <form action="" method="POST">
                                     <input type="hidden" name="usuario_id" value="<?php echo $usuario['id']; ?>">
                                     <div class="form-group">
-                                        <label for="nueva_oassword">Nueva Contraseña</label>
-                                        <input type="password" class="form-control" id="nueva_oassword" name="nueva_oassword" required>
+                                        <label for="nueva_password">Nueva Contraseña</label>
+                                        <input type="password" class="form-control" id="nueva_password" name="nueva_password" required>
                                     </div>
-                                    <button type="submit" name="cambiar_oassword" class="btn btn-primary">Guardar Cambios</button>
+                                    <button type="submit" name="cambiar_password" class="btn btn-primary">Guardar Cambios</button>
                                 </form>
                             </div>
                         </div>
