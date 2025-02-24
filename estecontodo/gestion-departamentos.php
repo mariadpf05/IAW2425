@@ -14,14 +14,14 @@ include "conexion.php";
 
 // Procesar la eliminación de un departamento
 if (isset($_GET['eliminar'])) {
-    $id_departamento = filter_var($_GET['eliminar'], FILTER_VALIDATE_INT);
+    $departamento_id = filter_var($_GET['eliminar'], FILTER_VALIDATE_INT);
 
-    if ($id_departamento) {
+    if ($departamento_id) {
         // Eliminar las actividades asociadas al departamento
-        $query_eliminar_actividades = "DELETE FROM actividad WHERE departamento_id = $id_departamento";
+        $query_eliminar_actividades = "DELETE FROM actividad WHERE departamento_id = $departamento_id";
         if (mysqli_query($enlace, $query_eliminar_actividades)) {
             // Eliminar el departamento
-            $query_eliminar_departamento = "DELETE FROM departamento WHERE id_dept = $id_departamento";
+            $query_eliminar_departamento = "DELETE FROM departamento WHERE id_dept = $departamento_id";
             if (mysqli_query($enlace, $query_eliminar_departamento)) {
                 $mensaje = "Departamento y actividades asociadas eliminados correctamente.";
             } else {

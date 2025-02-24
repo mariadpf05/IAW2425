@@ -105,6 +105,7 @@ $formatter = new IntlDateFormatter(
     IntlDateFormatter::GREGORIAN
 );
 $ultima_conexion_formateada = $formatter->format($ultima_conexion);
+$ip_usuario = $_SERVER['REMOTE_ADDR'];
 ?>
 
 <!DOCTYPE html>
@@ -128,7 +129,7 @@ $ultima_conexion_formateada = $formatter->format($ultima_conexion);
     <a href="descargar_actividades.php" class="btn btn-warning m-3">Descargar actividades</a>
     <button id="modo-oscuro" class="btn btn-secondary m-3">Modo Oscuro</button>
     <h1 class="mb-4">
-        Bienvenido, <?php echo htmlspecialchars($_SESSION['usuarios_nombre']); ?>, se conectó por última vez el <?php echo $ultima_conexion_formateada; ?>
+        Bienvenido, <?php echo htmlspecialchars($_SESSION['usuarios_nombre']); ?>, se conectó por última vez el <?php echo $ultima_conexion_formateada; ?> con la IP: <?php echo $ip_usuario; ?>.
     </h1>
     <h1 class="mb-4">Consultar Actividades</h1>
 
