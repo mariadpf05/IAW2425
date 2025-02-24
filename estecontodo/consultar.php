@@ -128,7 +128,6 @@ $ip_usuario = $_SERVER['REMOTE_ADDR'];
         <a href="gestion_usuarios.php" class="btn btn-primary">Gestionar usuarios</a>
     <?php endif; ?>
     <a href="descargar_actividades.php" class="btn btn-warning m-3">Descargar actividades</a>
-    <button id="modo-oscuro" class="btn btn-secondary m-3">Modo Oscuro</button>
     <h1 class="mb-4">
         Bienvenido, <?php echo htmlspecialchars($_SESSION['usuarios_nombre']); ?> con el correo <?php echo htmlspecialchars($_SESSION['usuarios_email']); ?>, se conectó por última vez el <?php echo $ultima_conexion_formateada; ?> con la IP: <?php echo $ip_usuario; ?>.
     </h1>
@@ -222,7 +221,18 @@ $ip_usuario = $_SERVER['REMOTE_ADDR'];
             <?php endif; ?>
         </ul>
     </nav>
-
+    <div class="d-flex justify-content-between mb-4">
+        <div class="bg-secondary text-white p-2 rounded text-center flex-fill mx-1">
+            <strong>Total Actividades Propuestas:</strong> <?php echo $total_actividades; ?>
+        </div>
+        <div class="bg-secondary text-white p-2 rounded text-center flex-fill mx-1">
+            <strong>Total Actividades Aprobadas:</strong> <?php echo $total_aprobadas; ?>
+        </div>
+        <div class="bg-secondary text-white p-2 rounded text-center flex-fill mx-1">
+            <strong>Total Actividades Pendientes:</strong> <?php echo $total_pendientes; ?>
+        </div>
+    </div>
+    <button id="modo-oscuro" class="btn btn-secondary m-3">Modo Oscuro</button>
     <a href="nueva.php" class="btn btn-primary">Añadir Actividad</a>
     <?php if ($_SESSION['usuarios_roles'] == 'administrador'): ?>
         <a href="eliminar.php" class="btn btn-danger">Eliminar Actividad</a>
