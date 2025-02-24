@@ -1,11 +1,17 @@
 <?php
 session_start();
-
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL & ~E_DEPRECATED & ~E_NOTICE);
 // Verificar si la sesión está iniciada
 if (!isset($_SESSION['usuarios_nombre'])) {
     header("Location: login.php");
     exit();
 }
+
+// Registrar el acceso en el archivo de logs
+$log_message = date('Y-m-d H:i:s') . " - Usuario: " . $_SESSION['usuarios_nombre'] . " accedió a la gestión de actividades." . PHP_EOL;
+file_put_contents('logs.txt', $log_message, FILE_APPEND);
 
 // Conexión a la base de datos
 include "conexion.php";
@@ -110,11 +116,17 @@ $ultima_conexion_formateada = $formatter->format($ultima_conexion);
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-light">
+<body>
     <a href="cerrar.php" class="btn btn-danger m-3">Cerrar Sesión</a>
+    <?php if ($_SESSION['usuarios_roles'] == 'administrador'): ?>
+        <a href="gestion-departamentos.php" class="btn btn-primary">Gestionar departamentos</a>
+    <?php endif; ?>
     <a href="estadisticas.php" class="btn btn-warning m-3">Estadísticas</a>
+    <?php if ($_SESSION['usuarios_roles'] == 'administrador'): ?>
+        <a href="gestion_usuarios.php" class="btn btn-primary">Gestionar usuarios</a>
+    <?php endif; ?>
+    <a href="descargar_actividades.php" class="btn btn-warning m-3">Descargar actividades</a>
     <button id="modo-oscuro" class="btn btn-secondary m-3">Modo Oscuro</button>
-
     <h1 class="mb-4">
         Bienvenido, <?php echo htmlspecialchars($_SESSION['usuarios_nombre']); ?>, se conectó por última vez el <?php echo $ultima_conexion_formateada; ?>
     </h1>

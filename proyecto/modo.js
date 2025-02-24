@@ -1,28 +1,19 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // Verificar si el modo oscuro está activado en localStorage
-    if (localStorage.getItem('modoOscuro') === 'true') {
-        document.body.classList.add('modo-oscuro');
-    }
+if (localStorage.getItem('modoOscuro') === 'true') {
+    document.body.classList.add('modo-oscuro'); // Aplicar modo oscuro
+    document.getElementById('cambiar-tema').innerHTML = '<i class="fas fa-sun"></i> Modo Claro'; // Cambiar ícono y texto
+}
 
-    // Alternar el modo oscuro cuando el usuario haga clic en el botón o enlace
-    document.getElementById('modo-oscuro').addEventListener('click', function(e) {
-        e.preventDefault(); // Prevenir la acción por defecto del enlace
+// Paso 2: Escuchar el clic en el botón
+document.getElementById('cambiar-tema').addEventListener('click', function() {
+    // Alternar la clase 'modo-oscuro' en el body
+    document.body.classList.toggle('modo-oscuro');
 
-        // Alternar la clase 'modo-oscuro' en el body
-        document.body.classList.toggle('modo-oscuro');
-
-        // Guardar o eliminar la preferencia de modo oscuro en localStorage
-        if (document.body.classList.contains('modo-oscuro')) {
-            localStorage.setItem('modoOscuro', 'true');
-            this.textContent = "Desactivar Modo Oscuro"; // Cambiar el texto del botón
-        } else {
-            localStorage.setItem('modoOscuro', 'false');
-            this.textContent = "Activar Modo Oscuro";
-        }
-    });
-
-    // Al cargar la página, ajustar el texto del enlace según el estado
+    // Guardar la preferencia en localStorage
     if (document.body.classList.contains('modo-oscuro')) {
-        document.getElementById('modo-oscuro').textContent = "Desactivar Modo Oscuro";
+        localStorage.setItem('modoOscuro', 'true'); // Guardar que el modo oscuro está activado
+        this.innerHTML = '<i class="fas fa-sun"></i> Modo Claro'; // Cambiar ícono y texto
+    } else {
+        localStorage.setItem('modoOscuro', 'false'); // Guardar que el modo oscuro está desactivado
+        this.innerHTML = '<i class="fas fa-moon"></i> Modo Oscuro'; // Cambiar ícono y texto
     }
 });

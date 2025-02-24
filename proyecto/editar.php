@@ -1,6 +1,8 @@
 <?php
 session_start();
-
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL & ~E_DEPRECATED & ~E_NOTICE);
 // Verificar si la sesión está iniciada
 if (!isset($_SESSION['usuarios_nombre'])) {
     header("Location: logins.php");
@@ -100,6 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Editar Actividad</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="style.css">
     <style>
         body {
             background-color: #f8f9fa;
@@ -237,6 +240,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="modo.js"></script>
     <script>
         $(function() {
             // Configurar el datepicker para la fecha de inicio

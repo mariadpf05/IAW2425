@@ -1,6 +1,8 @@
 <?php
 session_start();
-
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL & ~E_DEPRECATED & ~E_NOTICE);
 // Verificar si la sesión está iniciada
 if (!isset($_SESSION['usuarios_nombre'])) {
     header("Location: login.php");
@@ -44,7 +46,7 @@ mysqli_close($enlace);
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-light">
+<body>
     <a href="consultar.php" class="btn btn-primary m-3">Volver a Gestión de Actividades</a>
 
     <h1 class="mb-4">Estadísticas de Actividades</h1>
@@ -73,5 +75,6 @@ mysqli_close($enlace);
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="modo.js"></script>
 </body>
 </html>
